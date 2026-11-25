@@ -36,6 +36,13 @@ def main():
         raise FileNotFoundError(f"Expected top.png and bottom.png inside {board_dir}")
     th, tw = top_raw.shape[:2]
     bh, bw = btm_raw.shape[:2]
-    top_align = warp_board(top_raw, [[0, 0], [tw - 1, 0], [tw - 1, th - 1]], out_size = (1600, 1200))
-    btm_warp = warp_board(btm_raw, [[0, 0], ])
+    top_align = warp_board(top_raw, [[0, 0], [tw - 1, 0], [tw - 1, th - 1], [0, th - 1]], out_size = (1600, 1200))
+    btm_warp = warp_board(btm_raw, [[0, 0], [bw - 1, 0], [bw - 1, bh - 1], [0, bh - 1]], out_size = (1600, 1200))
+    btm_align = align_btm_to_top(top_align, btm_warp)
+    top_mask = extract_trace_mark(top_align)
+    btm_mask = extract_trace_mark(btm_align)
+    cv2.inwrite(str(out_dir / ""))
+    cv2.inwrite(str(out_dir / ""))
+    cv2.inwrite(str(out_dir / ""))
+    cv2.inwrite(str(out_dir / ""))
     
