@@ -175,6 +175,7 @@ End;
 Procedure RunImport;
 Var
     FolderPath : String;
-    
-
-
+Begin
+    FolderPath := 'D:\Hack Club\pcb-rev-eng\outputs\sample_board';
+    ImportDraftFromFolder(FolderPath);
+End;
