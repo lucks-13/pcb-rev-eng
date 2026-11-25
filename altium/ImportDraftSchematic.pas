@@ -107,4 +107,19 @@ Begin
         BaseX := MilsToCoord(1000);
         BaseY := MilsToCoord(7000);
         StepX := MilsToCoord(1800);
-        Step
+        StepY := MilsToCoord(1600);
+
+        SchServer.ProcessControl.PreProcess(SchDoc, '');
+        Try
+            ColIdx := 0;
+            RowIdx := 0;
+
+            For I := 1 To BomLines.Count - 1 Do
+            Begin
+                If TrimStr(BomLines[I]) = '' Then Continue;
+                SplitCSVLine(BomLines[I], Fields);
+                If Fields.Count < 4 Then Continue;
+
+                Desig := Fields[0];
+                PartType := Fields[1];
+                PartVal := Fields[]
