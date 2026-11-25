@@ -8,4 +8,11 @@ from ultralytics import YOLO
 from paddleocr import PaddleOCR
 
 class PCBDetector:
-    def __init__(self, parts_db_pa):
+    def __init__(self, parts_db_path : Path, yolo_weights : Optional[Path] = None, use_gpu : bool = False):
+        with open(parts_db_path, "r", encoding = "utf-8") as f:
+            self.parts_db : Dict = json.load(f)
+        self.model = None
+        if YOLO is not None and yolo_weights and yolo_weights.exists():
+            self.model = YOLO(str(yolo_weights))
+        self.ocr = None
+        if Pa
