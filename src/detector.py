@@ -89,4 +89,8 @@ class PCBDetector:
             pins.append(PinNode(pin_id = f"{comp.designator}.{label}", designator = comp.designator, pin_num = str(label), side = side, xy = xy, confi = comp.confi * 0.85))
         return pins
 
-    def detect(self, top_img : np.ndarray, btm_img : np.ndarray, vias_xy : List[Tuple[int, int]]) -> Tuple[List[ComponentItem], List[]]
+    def detect(self, top_img : np.ndarray, btm_img : np.ndarray, vias_xy : List[Tuple[int, int]]) -> Tuple[List[ComponentItem], List[PinNode]]:
+        raw_detections : List[Tuple[str, str, Tuple[int, int, int,int]]] = []
+        if self.model is not None:
+            for side_name, img in [("top", top_img), ("bottom", btm_img)]:
+                results = 
