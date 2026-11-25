@@ -47,6 +47,7 @@ class PCBDetector:
         for part_key, info in self.parts_db.get("known_parts", {}).items():
             if part_key.upper() in upper:
                 des_match = re.search(r"\bU\d+\b", upper)
-                des = des_match.group(0) if des_match else f"U_{}"
+                des = des_match.group(0) if des_match else f"U_{part_key}"
+                return (des, info.get("part_type", "ic"), info.get("default_value", part_key), info.get("footprint", "SOIC-8"))
     
     
