@@ -46,4 +46,18 @@ Begin
             If Fields.Count >= 3 Then
             Begin
                 NetName := Fields[0];
-                R
+                RowDes := Fields[1];
+                RowPin := Fields[2];
+                If SameText(RowDes, Desig) And SameText(RowPin, PinNum) Then
+                Begin
+                    Result := NetName;
+                    Exit;
+                End;
+            End;
+        End;
+    Finally
+        Fields.Free;
+    End;
+End;
+
+Procedure PlaceNetLabelNear(SchDoc : Isch)
