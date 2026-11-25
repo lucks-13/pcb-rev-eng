@@ -29,5 +29,7 @@ class PCBDetector:
             cx2, cy2 = min(w, x2 + pad), min(h, y2 + pad)
             crop = img[cy1:cy2, cx1:cx2]
             if crop.size == 0:
-                
+                texts.append("")
+                continue
+            crop_up = cv2.resize(crop, None, fx=)
     
