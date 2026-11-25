@@ -114,4 +114,7 @@ class PCBDetector:
                 auto_idx += 1
             comp = ComponentItem(designator = des, part_type = ptype, value = val, footprint = fp, bbox = bbox, confi = conf, needs_review = review, notes = notes)
             components.append(comp)
-            pins.extend(self.gen_pins_for_component)
+            pins.extend(self.gen_pins_for_component(comp, side = side_name))
+        for idx, (vx, vy) in enumerate(vias_xy, start = 1):
+            via_id  = f"VIA_{idx:03d}"
+            pins.a
