@@ -50,5 +50,8 @@ def main():
     components, pins = detector.detect(top_align, btm_align,vias_xy)
     nets = build_netlist(top_mask, btm_mask, pins)
     draft = BroardDraft(board_name = args.board, img_size = (1600, 1200), components = components, pins = pins, nets = nets)
-    expo
-    
+    export_draft(draft, out_dir)
+    print(f"Done. Exported {len(components)} components, {len(pins)} pins, {len(nets)} nets to {out_dir}")
+
+if __name__ == "__main__":
+    main()
