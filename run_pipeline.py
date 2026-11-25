@@ -47,4 +47,8 @@ def main():
     cv2.inwrite(str(out_dir / "bottom_trace_mask.png"), btm_mask)
     vias_xy = find_cand_vias(top_mask, btm_mask)
     detector = PCBDetector(parts_db_path = Path("data/parts_db.json"), yolo_weights = Path(args.weights) if args.weights else None, use_gpu = False)
+    components, pins = detector.detect(top_align, btm_align,vias_xy)
+    nets = build_netlist(top_mask, btm_mask, pins)
+    draft = BroardDraft(board_name = args.board, img_size = (1600, 1200), components = components, pins = pins, nets = nets)
+    expo
     
