@@ -36,4 +36,8 @@ def render_debug_overlay(board_dir : Path, out_dir : Path) -> None:
     cv2.imwrite(str(out_dir / "top_overlay.png"), top_vis)
     cv2.imwrite(str(out_dir / "bottom_overlay.png"), btm_vis)
 
-def re_export_from_edited_json(out_dir : Path)
+def re_export_from_edited_json(out_dir : Path) -> None:
+    with open(out_dir / "draft_board.json", "r", encoding = "utf-8") as f:
+        d = json.load(f)
+    draft = BroardDraft(board_name = d["board_name"], img_size = tuple(d["img_size"]), components = [ComponentItem(**c) for c in d["components"]], pins = [PinNode(**p) for p in d["pins"]], nets = [NetEntry(**n) for n in d["nets"]])
+    export_draft(draft, out_dir)
