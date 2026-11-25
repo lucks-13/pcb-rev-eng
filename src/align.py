@@ -11,4 +11,7 @@ def ord_corners(pts : np.ndarray) -> np.ndarray:
     rect[3] = pts[np.argmin(diff)]
     return rect
 
-def warp_board(img : np.nd)
+def warp_board(img : np.ndarray, corners : np.ndarray, out_size = (1600, 1200)) -> np.ndarray:
+    src = ord_corners(np.array(corners, dtype = "float32"))
+    w, h = out_size
+    dst = np.array([[]]) 
