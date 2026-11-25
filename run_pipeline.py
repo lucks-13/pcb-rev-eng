@@ -28,5 +28,5 @@ def main():
     parser.add_argument("--weights", default = "", help = "Optional path to YOLO .pt weights")
     args = parser.parse_args()
     board_dir = Path("data/boards") / args.board
-    out_dir = P
+    out_dir = Path("")
     
