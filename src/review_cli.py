@@ -8,5 +8,11 @@ def main():
     parser.add_argument("--reexport", action = "store_true")
     args = parser.parse_args()
 
-    board_dir = Path("data/boards")
-    out_dir  = Path
+    board_dir = Path("data/boards") / args.board
+    out_dir  = Path("outputs") / args.board
+
+    if args.reexport:
+        re_export_from_edited_json(out_dir)
+        print(f"Re-exported bom.csv and netlist.csv in {out_dir}")
+
+    render_debug_overlay(board_dir, )
