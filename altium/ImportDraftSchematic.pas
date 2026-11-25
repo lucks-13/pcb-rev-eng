@@ -142,5 +142,9 @@ Begin
                     Begin
                         Iter.AddFilter_ObjectSet(MkSet(ePin));
                         PinObj := Iter.FirstSchObject;
-                        While Pin
+                        While PinObj <> Nil Do
+                        Begin
+                            NetName := FindNetForPin(NetLines, Desig, PinObj.Designator);
+                            PlaceNetLabelNear(SchDoc, PinObj.Location.X, PinObj.Location.Y, NetName);
+                            PinObj := Iter.NextSchO
 
