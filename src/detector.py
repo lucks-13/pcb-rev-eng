@@ -39,7 +39,11 @@ class PCBDetector:
                     txt, conf = line[1][0], line[1][1]
                     if conf >= 0.45 and txt.strip():
                         found.append(txt.strip())
-            texts.append(txt.strip())
+            texts.append(" | ".join(found))
         return texts
+
+    def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, float, bool, str]:
+        upper = ocr_text.upper()
+        
     
     
