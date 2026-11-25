@@ -1,5 +1,6 @@
 import re
 import json
+import cv2
 import numpy as np
 from pathlib import Path
 from typing import List, Tuple, Dict, Optional
@@ -42,7 +43,7 @@ class PCBDetector:
             texts.append(" | ".join(found))
         return texts
 
-    def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, float, bool, str]:
+    def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, str, float, bool, str]:
         upper = ocr_text.upper()
         for part_key, info in self.parts_db.get("known_parts", {}).items():
             if part_key.upper() in upper:

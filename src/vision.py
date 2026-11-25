@@ -8,6 +8,6 @@ def extract_trace_mark(aligned_bgr : np.ndarray) -> np.ndarray:
     enhanced = clahe.apply(l_chan)
     mask = cv2.adaptiveThreshold(enhanced, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, -6)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-    mask = cv2.morphologyEX(mask, cv2.MORPH_OPEN, kernel, iterations = 1)
-    mask = cv2.morphologyEX(mask, cv2.MORPH_CLOSE, kernel, iterations = 2)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel, iterations = 1)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel, iterations = 2)
     return mask
