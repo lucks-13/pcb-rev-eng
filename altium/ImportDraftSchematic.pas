@@ -122,4 +122,14 @@ Begin
 
                 Desig := Fields[0];
                 PartType := Fields[1];
-                PartVal := Fields[]
+                PartVal := Fields[2];
+                Footprint := Fields[3];
+
+                CurX := BaseX + (ColIdx * StepX);
+                CurY := BaseY - (RowIdx * StepY);
+
+                Comp := SchServer.SchObjectFactory(eSchComponent, eCreate_Default);
+                If Comp <> Nil Then
+                Begin
+                    
+
