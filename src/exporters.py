@@ -16,4 +16,8 @@ def export_draft(draft : BroardDraft, out_dir : Path) -> None:
         writer = csv.writer(f)
         writer.writerow(["NetName", "Designator", "Pin", "Confidence", "Flags"])
         for net in draft.nets:
-            for pin_ref in net
+            for pin_ref in net.pins:
+                if "." in pin_ref:
+                    des, pin = pin_ref.split(".", 1)
+                    writer.writerow([net.net_name, des, pin, net.confi, ";".join(net.flags)])
+
