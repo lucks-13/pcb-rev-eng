@@ -14,4 +14,6 @@ def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[i
     num_labels, _, stats, centroids = cv2.connectedComponentsWithStats(overlap)
     vias = []
     for i in range(1, num_labels):
-        area = stats[i, ]
+        area = stats[i, cv2.CC_STAT_AREA]
+        w = stats[i, cv2.CC_STAT_WIDTH]
+        h = 
