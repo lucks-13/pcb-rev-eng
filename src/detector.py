@@ -110,4 +110,8 @@ class PCBDetector:
             des, ptype, val, fp, conf, review, notes = self.infer_part_metadata(ocr_txt, cls_name)
             if not des:
                 prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "X")
-                des
+                des = f"{prefix}_AUTO_{auto_idx}"
+                auto_idx += 1
+            comp = ComponentItem(designator = des, part_type = ptype, value = val, footprint = fp, bbox = bbox, confi = conf, needs_review = review, notes = notes)
+            components.append(comp)
+            pins.extend(self.gen_pins_for_component)
