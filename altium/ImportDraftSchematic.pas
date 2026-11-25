@@ -131,5 +131,9 @@ Begin
                 Comp := SchServer.SchObjectFactory(eSchComponent, eCreate_Default);
                 If Comp <> Nil Then
                 Begin
-                    
+                    Comp.Designator.Text := Desig;
+                    Comp.Comment.Text := PartVal;
+                    Comp.Footprint := Footprint;
+                    Comp.Location := Point(CurX, CurY);
+                    SchDoc.RegisterSchObjectInContainer(C)
 
