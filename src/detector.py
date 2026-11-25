@@ -117,4 +117,4 @@ class PCBDetector:
             pins.extend(self.gen_pins_for_component(comp, side = side_name))
         for idx, (vx, vy) in enumerate(vias_xy, start = 1):
             via_id  = f"VIA_{idx:03d}"
-            pins.a
+            pins.append(PinNode(pin_id = f"{via_id}.1", designator = via_id, pin_num = "1", side = "through", xy = (int(vx), int(vy)), ))
