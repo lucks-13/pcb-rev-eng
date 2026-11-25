@@ -8,6 +8,7 @@ from src.vision import extract_trace_mark
 from src.detector import PCBDetector
 from src.graph_builder import build_netlist
 from src.exporters import export_draft
+from src.review_overlay import render_debug_overlay
 
 def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[int, int]]:
     overlap = cv2.bitwise_and(top_mask, btm_mask)
@@ -51,7 +52,7 @@ def main():
     nets = build_netlist(top_mask, btm_mask, pins)
     draft = BroardDraft(board_name = args.board, img_size = (1600, 1200), components = components, pins = pins, nets = nets)
     export_draft(draft, out_dir)
+    render_debug_overlay(board_dir, out_dir)
     print(f"Done. Exported {len(components)} components, {len(pins)} pins, {len(nets)} nets to {out_dir}")
-
 if __name__ == "__main__":
     main()

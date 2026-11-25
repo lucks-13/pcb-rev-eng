@@ -28,7 +28,7 @@ def render_debug_overlay(board_dir : Path, out_dir : Path) -> None:
         x1, y1, x2, y2 = c["bbox"]
         color = (0, 165, 255) if c.get("needs_review") else (0, 255, 0)
         label = f"{c['designator']} ({c['value']})"
-        prefix = f"{c['designator']}"
+        prefix = f"{c['designator']}."
         sides = {s for pid, s in pin_sides.items() if pid.startswith(prefix)}
         target = btm_vis if sides == {"bottom"} else top_vis
         cv2.rectangle(target, (x1, y1), (x2, y2), color, 2)
