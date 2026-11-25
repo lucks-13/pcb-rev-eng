@@ -25,4 +25,5 @@ class PCBDetector:
         texts : List[str] = []
         pad = 24
         for (x1, y1, x2, y2) in boxes:
-            cx1, cy1 = max
+            cx1, cy1 = max(0, x1 - pad), max(0, y1 - pad)
+            cx2, cy2 = min(w, x2 + pad)
