@@ -60,4 +60,9 @@ Begin
     End;
 End;
 
-Procedure PlaceNetLabelNear(SchDoc : Isch)
+Procedure PlaceNetLabelNear(SchDoc : Isch_Document; X; Y : TCoord; Const NetName : String);
+Var
+    NetName : Isch_NetLabel;
+Begin
+    If NetName = '' Then Exit;
+    NetLbl := SchServer.SchObjectFactory(eNetLabel)
