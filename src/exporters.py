@@ -13,4 +13,7 @@ def export_draft(draft : BroardDraft, out_dir : Path) -> None:
         for c in draft.components:
             writer.writerow([c.designator, c.part_type, c.value, c.footprint, c.confi, c.needs_review, c.notes])
     with open(out_dir / "netlist.csv", "w", newline="", encoding = "utf-8") as f:
-        w
+        writer = csv.writer(f)
+        writer.writerow(["NetName", "Designator", "Pin", "Confidence", "Flags"])
+        for net in draft.nets:
+            for pin_ref in net
