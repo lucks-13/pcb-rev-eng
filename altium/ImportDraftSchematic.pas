@@ -94,4 +94,17 @@ Begin
     If (SchDoc = Nil) Or (SchDoc.PinObjectId <> eSchematic) Then
     Begin
         ShowMessage('Please open a Schematic (.SchDoc) document first.');
-        Exit
+        Exit;
+    End;
+
+    BomLines := TStringList.Create;
+    NetLines := TStringList.Create;
+    Fields := TStringList.Create;
+    Try
+        BomLines.LoadFromFile(BomPath);
+        NetLines.LoadFromFile(NetPath);
+        
+        BaseX := MilsToCoord(1000);
+        BaseY := MilsToCoord(7000);
+        StepX := MilsToCoord(1800);
+        Step
