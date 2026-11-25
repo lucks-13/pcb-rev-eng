@@ -67,4 +67,7 @@ class PCBDetector:
             return designator, ptype, val,fp, 0.70, needs_review, notes
         return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part; OCR : {ocr_text}" if ocr_text else "Unclassified part; no OCR text")
     
-    
+    def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
+        x1, y1, x2, y2 = comp.bbox
+        fp_info = self.parts_db.get("footprints", {}).get(comp.footprint)
+        pin_labels = fp_info["pins"] if fp_info else []
