@@ -93,4 +93,10 @@ class PCBDetector:
         raw_detections : List[Tuple[str, str, Tuple[int, int, int,int]]] = []
         if self.model is not None:
             for side_name, img in [("top", top_img), ("bottom", btm_img)]:
-                results = 
+                results = self.model.predict(img, verbose = False)
+                for r in results:
+                    names = r.names
+                    for box in r.boxes:
+                        cls_id = int(box.cls[0])
+                        cls_name = names.get(cls_id, str(cls_id))
+                        bx1, by1, bx2, by2 = map(int, box.xyxy[0].tolist())
