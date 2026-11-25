@@ -31,5 +31,10 @@ class PCBDetector:
             if crop.size == 0:
                 texts.append("")
                 continue
-            crop_up = cv2.resize(crop, None, fx=)
+            crop_up = cv2.resize(crop, None, fx = 2.0, fy = 2.0, interpolation = cv2.INTER_CUBIC)
+            result  = self.ocr.ocr(crop_up, cls = True)
+            found = []
+            if result and result[0]:
+                for line in result[0]:
+                    txt, conf = line[1][0]
     
