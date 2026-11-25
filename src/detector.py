@@ -75,4 +75,11 @@ class PCBDetector:
         pins : List[PinNode] = []
         if n == 2:
             pts = [(x1 + int(0.25 * (x2 - x1)), (y1 + y2) // 2),(x2 - int(0.15 * (x2 - x1)), (y1 + y2) // 2)]
-        else
+        else:
+            half = max(1, n // 2)
+            pts = []
+            for i in range(n):
+                if i < half:
+                    frac = (i + 0.5) / half
+                    pts.append((x1 + int(0.1 * (x2 - x1)), int(y1 + frac * (y2 - y1))))
+                    
