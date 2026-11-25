@@ -19,4 +19,7 @@ def build_netlist(top_mask, btm_mask, pins : List[PinNode], snap_radius : int = 
             if lbl > 0:
                 G.add_edge(p.pin_id, f"BOTTOM_COPPER_{lbl}")
     nets : List[NetEntry] = []
-    
+    idx = 1
+    for comp in nx.connected_components(G):
+        pin_nodes = sorted([n for n in comp if not n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))])
+        if len(pin_nodes)
