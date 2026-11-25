@@ -72,4 +72,11 @@ Begin
     SchDoc.RegisterSchObjectInContainer(NetLbl);
 End;
 
-Procedure ImportDraftFromFolder()
+Procedure ImportDraftFromFolder(Const FolderPath : String);
+Var
+    SchDoc : Isch_Document;
+    BomLines, NetLines, Fields : TStringList;
+    BomPath, NetPath : String;
+    I, ColIdx, RowIdx : Integer;
+    Desig, PartType, PartVal, Footprint : String;
+    BaseX, B
