@@ -11,4 +11,7 @@ from src.exporters import export_draft
 
 def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[int, int]]:
     overlap = cv2.bitwise_and(top_mask, btm_mask)
-    num_labels, _, stats, centroids = cv2.
+    num_labels, _, stats, centroids = cv2.connectedComponentsWithStats(overlap)
+    vias = []
+    for i in range(1, num_labels):
+        area = stats[i, ]
