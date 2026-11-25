@@ -63,6 +63,8 @@ class PCBDetector:
         if prefix in type_map:
             ptype, fp, val = type_map[prefix]
             needs_review = ptype in ("capacitor", "inductor", "ic")
-            notes = f"OCR : {ocr_text}" if ocr_text else "No OCR text; verify"
+            notes = f"OCR : {ocr_text}" if ocr_text else "No OCR text; verify value/footprint"
+            return designator, ptype, val,fp, 0.70, needs_review, notes
+        return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part; OCR : {ocr_text}" if ocr_text else "Unclassified part; no OCR text")
     
     
