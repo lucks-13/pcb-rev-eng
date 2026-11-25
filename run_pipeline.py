@@ -30,5 +30,8 @@ def main():
     board_dir = Path("data/boards") / args.board
     out_dir = Path("outputs") / args.board
     out_dir.mkdir(parents = True, exist_ok = True)
-    c
+    top_raw = cv2.imread(str(board_dir / "top.png"))
+    btm_raw = cv2.imread(str(board_dir / "bottom.png"))
+    if top_raw is None or btm_raw is None:
+        raise FileNotFoundError(f"Expected top.")
     
