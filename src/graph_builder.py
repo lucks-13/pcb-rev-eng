@@ -11,4 +11,12 @@ def build_netlist(top_mask, btm_mask, pins : List[PinNode], snap_radius : int = 
         G.add_node(p.pin_id, meta = p)
         x, y = p.xy
         if p.side in ("top", "through"):
-            lbl = sample_region(top_labels, x, y, )
+            lbl = sample_region(top_labels, x, y, snap_radius)
+            if lbl > 0:
+                G.add_edge(p.pin_id, f"TOP_COPPER_{lbl}")
+        if p.side in ("bottom", "through"):
+            lbl = sample_region(btm_labels, x, y, snap_radius)
+            if lbl > 0:
+                G.add_edge(p.pin_id, f"BOTTOM_COPPER_{lbl}")
+    nets : List[NetEntry] = []
+    
