@@ -57,7 +57,12 @@ class PCBDetector:
             "C" : ("capacitor", "0805", "C_UNK?"),
             "U" : ("ic", "SOIC-8", "IC_UNK?"),
             "D" : ("diode", "SOD-123", "D_UNK?"),
-            "L" : 
+            "L" : ("inductor", "0805", "L_UNK?"),
+            "J" : ("connector", "HDR-1X4", "CONN_UNK?")
         }
+        if prefix in type_map:
+            ptype, fp, val = type_map[prefix]
+            needs_review = ptype in ("capacitor", "inductor", "ic")
+            notes = f"OCR : {ocr_text}" if ocr_text else "No OCR text; verify"
     
     
