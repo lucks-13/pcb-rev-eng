@@ -22,3 +22,9 @@ def render_debug_overlay(board_dir : Path, out_dir : Path) -> None:
             cv2.circle(btm_vis, (x, y), 6, (0, 255, 255), 2)
         elif p["side"] == "top":
             cv2.circle(top_vis, (x, y), 4, (255, 0, 255), -1)
+        elif p["side"] == "bottom":
+            cv2.circle(btm_vis, (x, y), 4, (255, 0, 255), -1)
+    for c in data.get("components", []):
+        x1, y1, x2, y2 = c["bbox"]
+        color = (0, 165, 255) if c.get("needs_review") else (0, 255, 0)
+        label = f"{c}"
