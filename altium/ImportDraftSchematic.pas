@@ -79,4 +79,15 @@ Var
     BomPath, NetPath : String;
     I, ColIdx, RowIdx : Integer;
     Desig, PartType, PartVal, Footprint : String;
-    BaseX, B
+    BaseX, BaseY, StepX, StepY, CurX, CurY : TCoord;
+    Comp : Isch_Component;
+    Iter : Isch_Pin;
+    PinObj : Isch_Pin;
+    NetName : String;
+Begin
+    If SchServer = Nil Then
+    Begin
+        ShowMessage('Schematic server is not active.');
+        Exit;
+    End;
+    SchDoc := SchServer.G
