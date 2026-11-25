@@ -15,4 +15,7 @@ class PCBDetector:
         if YOLO is not None and yolo_weights and yolo_weights.exists():
             self.model = YOLO(str(yolo_weights))
         self.ocr = None
-        if Pa
+        if PaddleOCR is not None:
+            self.ocr = PaddleOCR(use_angle_cls = True, lang = "en", use_gpu = use_gpu, show_log = False)
+
+    def run_ocr_crops(self, img : np.ndarray, boxes : List[Tuple[int, int, int, int]])
