@@ -5,4 +5,15 @@ from typing import List, Tuple, Optional, Dict
 class PinNode:
     pin_id : str
     designator : str
-    pi
+    pin_num : str
+    side : str
+    xy : Tuple[int, int]
+    confi = float = 1.0
+
+@dataclass
+class ComponentItem:
+    designator : str
+    part_type : str
+    value : str
+    footprint : str
+    bbox : 
