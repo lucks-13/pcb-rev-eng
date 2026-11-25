@@ -102,12 +102,12 @@ class PCBDetector:
                         cls_name = names.get(cls_id, str(cls_id))
                         bx1, by1, bx2, by2 = map(int, box.xyxy[0].tolist())
                         raw_detections.append((side_name, cls_name, (bx1, by1, bx2, by2)))
-        boxes_only = [d[2] for d in raw_detections]
-        ocr_outputs = self.run_ocr_crops(top_img, boxes_only)
         components : List[ComponentItem] = []
         pins : List[PinNode] = []
         auto_idx = 1
-        for (side_name, cls_name, bbox), ocr_txt in zip(raw_detections, ocr_outputs):
+        for side_name, cls_name, bbox in raw_detections:
+            src_img = top_img if side_name == "top" else btm_img
+            ocr_txt = self.run_ocr_crops(src_img, [bbox])[0]
             des, ptype, val, fp, conf, review, notes = self.infer_part_metadata(ocr_txt, cls_name)
             if not des:
                 prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "X")
