@@ -156,5 +156,14 @@ Begin
                 If ColIdx >= 5 Then
                 Begin
                     ColIdx := 0;
-                    Inc(Row)
+                    Inc(RowIdx);
+                End;
+            End;
+        Finally
+            SchServer.ProcessControl.ProcessControl.PostProcess(SchDoc, '');
+        End;
+
+        SchDoc.GraphicallyInvalidate;
+        ShowMessage()
+
 
