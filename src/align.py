@@ -20,4 +20,8 @@ def warp_board(img : np.ndarray, corners : np.ndarray, out_size = (1600, 1200)) 
 
 def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
     flipped = cv2.flip(btm_img, 1)
-    orb = cv2.
+    orb = cv2.ORB_create(3000)
+    kp1, des1 = orb.detectAndCompute(top_img, None)
+    kp2, des2 = orb.detectAndCompute(flipped, None)
+    bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck = True)
+    matches = sorted(bf.match(des1, des2), key = lambda )
