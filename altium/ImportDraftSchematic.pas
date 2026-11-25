@@ -30,4 +30,13 @@ Begin
     Result := OutFields.Count;
 End;
 
-Function FinD
+Function FindNetForPin(NetLines : TStringList; Const Desig, PinNum : String) : String;
+Var
+    Idx : Integer;
+    Fields : TStringList;
+    NetName, RowDes, RowPin : String;
+Begin
+    Result := '';
+    Fields := TStringList.Create;
+    Try
+        For Idx := 1 To NetLines.Count - 1 
