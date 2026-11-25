@@ -27,4 +27,6 @@ def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
     matches = sorted(bf.match(des1, des2), key = lambda m : m.distance)[:200]
     src_pts : np.float32([kp2[m.trainIdx].pt for m in matches]).reshape(-1, 1, 2)
     dst_pts : np.float32([kp1[m.trainIdx].pt for m in matches]).reshape(-1, 1, 2)
-    H, _ = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, ) 
+    H, _ = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
+    h, w = top_img.shape[:2]
+    return cv2.warpPerspective(flipped, H, (w, h)) 
