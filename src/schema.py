@@ -16,4 +16,12 @@ class ComponentItem:
     part_type : str
     value : str
     footprint : str
-    bbox : 
+    bbox : Tuple[int, int, int, int]
+    confi : float
+    needs_review : bool = False
+    notes : str
+
+@dataclass
+class NetEntry:
+    net_name : str
+    pins
