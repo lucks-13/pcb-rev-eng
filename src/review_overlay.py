@@ -17,4 +17,8 @@ def render_debug_overlay(board_dir : Path, out_dir : Path) -> None:
     pin_sides = {p["pin_id"] : p["side"] for p in data.get("pins", [])}
     for p in data.get("pins", []):
         x, y = p["xy"]
-        if p["side"] == "through"
+        if p["side"] == "through":
+            cv2.circle(top_vis, (x, y), 6, (0, 255, 255), 2)
+            cv2.circle(btm_vis, (x, y), 6, (0, 255, 255), 2)
+        elif p["side"] == "top":
+            cv2.circle(top_vis, (x, y), 4, (255, 0, 255), -1)
