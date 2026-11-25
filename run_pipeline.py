@@ -33,5 +33,9 @@ def main():
     top_raw = cv2.imread(str(board_dir / "top.png"))
     btm_raw = cv2.imread(str(board_dir / "bottom.png"))
     if top_raw is None or btm_raw is None:
-        raise FileNotFoundError(f"Expected top.")
+        raise FileNotFoundError(f"Expected top.png and bottom.png inside {board_dir}")
+    th, tw = top_raw.shape[:2]
+    bh, bw = btm_raw.shape[:2]
+    top_align = warp_board(top_raw, [[0, 0], [tw - 1, 0], [tw - 1, th - 1]], out_size = (1600, 1200))
+    btm_warp = warp_board(btm_raw, [[0, 0], ])
     
