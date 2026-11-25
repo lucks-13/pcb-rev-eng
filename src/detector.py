@@ -102,4 +102,9 @@ class PCBDetector:
                         bx1, by1, bx2, by2 = map(int, box.xyxy[0].tolist())
                         raw_detections.append((side_name, cls_name, (bx1, by1, bx2, by2)))
         boxes_only = [d[2] for d in raw_detections]
-        ocr_outputs = self.run_ocr_crops()
+        ocr_outputs = self.run_ocr_crops(top_img, boxes_only)
+        components : List[ComponentItem] = []
+        pins : List[PinNode] = []
+        auto_idx = 1
+        for (side_name, cls_name, bbox), ocr_txt in zip(raw_detections, ocr_outputs):
+            des, ptype, val, fp, conf, review
