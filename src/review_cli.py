@@ -6,4 +6,7 @@ def main():
     parser = argparse.ArgumentParser(description = "Re-render overlays or re-export CSV from draft_board.json")
     parser.add_argument("--board", required = True)
     parser.add_argument("--reexport", action = "store_true")
-    args 
+    args = parser.parse_args()
+
+    board_dir = Path("data/boards")
+    out_dir  = Path
