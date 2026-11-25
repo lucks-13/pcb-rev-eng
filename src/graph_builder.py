@@ -31,4 +31,9 @@ def build_netlist(top_mask, btm_mask, pins : List[PinNode], snap_radius : int = 
 
 def sample_region(label_map, x : int, y : int, r : int) -> int:
     h, w = label_map.shape
-    patch = label_map[max(0, y - )]
+    patch = label_map[max(0, y - r) : min(h, y + r +1), max(0, x - r) : min(w, x + r + 1)]
+    nonzero = patch[patch > 0]
+    if len(nonzero) == 0:
+        return 0
+    vals, counts = np.unique(nonzero, return_counts = True)
+    return int(vals[np.argmax(counts)])
