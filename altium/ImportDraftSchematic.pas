@@ -135,5 +135,12 @@ Begin
                     Comp.Comment.Text := PartVal;
                     Comp.Footprint := Footprint;
                     Comp.Location := Point(CurX, CurY);
-                    SchDoc.RegisterSchObjectInContainer(C)
+                    SchDoc.RegisterSchObjectInContainer(Comp);
+
+                    Iter := Comp.SchIteratorFactory;
+                    If Iter <> Nil Then
+                    Begin
+                        Iter.AddFilter_ObjectSet(MkSet(ePin));
+                        PinObj := Iter.FirstSchObject;
+                        While Pin
 
