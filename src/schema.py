@@ -8,7 +8,7 @@ class PinNode:
     pin_num : str
     side : str
     xy : Tuple[int, int]
-    confi = float = 1.0
+    confi : float = 1.0
 
 @dataclass
 class ComponentItem:
@@ -18,8 +18,8 @@ class ComponentItem:
     footprint : str
     bbox : Tuple[int, int, int, int]
     confi : float
+    notes : str = ""
     needs_review : bool = False
-    notes : str
 
 @dataclass
 class NetEntry:
