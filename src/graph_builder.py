@@ -1,5 +1,6 @@
 import cv2
 import networkx as nx
+import numpy as np
 from typing import List
 from .schema import PinNode, NetEntry
 
@@ -22,4 +23,12 @@ def build_netlist(top_mask, btm_mask, pins : List[PinNode], snap_radius : int = 
     idx = 1
     for comp in nx.connected_components(G):
         pin_nodes = sorted([n for n in comp if not n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))])
-        if len(pin_nodes)
+        if len(pin_nodes) < 2:
+            continue
+        nets.append(NetEntry(net_name=f"NET_{idx:03d}", pins = pin_nodes, confi = 0.80, flags = []))
+        idx += 1
+    return nets
+
+def sample_region(label_map, x : int, y : int, r : int) -> int:
+    h, w = label_map.shape
+    patch = label_map[max(0, y - )]
