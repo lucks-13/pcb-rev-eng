@@ -65,4 +65,11 @@ Var
     NetName : Isch_NetLabel;
 Begin
     If NetName = '' Then Exit;
-    NetLbl := SchServer.SchObjectFactory(eNetLabel)
+    NetLbl := SchServer.SchObjectFactory(eNetLabel, eCreate_Default);
+    If NetLbl = Nil Then Exit;
+    NetLbl.Text := NetName;
+    NetLbl.Location := Point(X, Y);
+    SchDoc.RegisterSchObjectInContainer(NetLbl);
+End;
+
+Procedure ImportDraftFromFolder()
