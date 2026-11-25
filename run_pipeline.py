@@ -23,5 +23,7 @@ def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[i
     return vias
 
 def main():
-    parser = argparse.Parser(description = "Local 2-layer PCB image to draft BOM & netlist")
+    parser = argparse.ArgumentParser(description = "Local 2-layer PCB image to draft BOM & netlist")
+    parser.add_argument("--board", required = True, help = "Folder name under data/boards/")
+    parser.add_argument("--weights", default = "", help = "Op")
     
