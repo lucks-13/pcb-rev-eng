@@ -100,3 +100,6 @@ class PCBDetector:
                         cls_id = int(box.cls[0])
                         cls_name = names.get(cls_id, str(cls_id))
                         bx1, by1, bx2, by2 = map(int, box.xyxy[0].tolist())
+                        raw_detections.append((side_name, cls_name, (bx1, by1, bx2, by2)))
+        boxes_only = [d[2] for d in raw_detections]
+        ocr_outputs = self.run_ocr_crops()
