@@ -36,5 +36,10 @@ class PCBDetector:
             found = []
             if result and result[0]:
                 for line in result[0]:
-                    txt, conf = line[1][0]
+                    txt, conf = line[1][0], line[1][1]
+                    if conf >= 0.45 and txt.strip():
+                        found.append(txt.strip())
+            texts.append(txt.strip())
+        return texts
+    
     
