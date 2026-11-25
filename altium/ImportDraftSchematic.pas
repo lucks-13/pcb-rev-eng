@@ -146,5 +146,15 @@ Begin
                         Begin
                             NetName := FindNetForPin(NetLines, Desig, PinObj.Designator);
                             PlaceNetLabelNear(SchDoc, PinObj.Location.X, PinObj.Location.Y, NetName);
-                            PinObj := Iter.NextSchO
+                            PinObj := Iter.NextSchObject;
+                        End;
+                        Comp.SchIteratorDestory(Iter);
+                    End;
+                End;
+
+                Inc(ColIdx);
+                If ColIdx >= 5 Then
+                Begin
+                    ColIdx := 0;
+                    Inc(Row)
 
