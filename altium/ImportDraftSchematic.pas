@@ -164,6 +164,17 @@ Begin
         End;
 
         SchDoc.GraphicallyInvalidate;
-        ShowMessage()
+        ShowMessage('Draft Schematic import complete.');
+    Finally
+        Fields.Free;
+        NetLines.Free;
+        BomLines.Free;
+    End;
+End;
+
+Procedure RunImport;
+Var
+    FolderPath : String;
+    
 
 
