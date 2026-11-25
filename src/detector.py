@@ -82,4 +82,7 @@ class PCBDetector:
                 if i < half:
                     frac = (i + 0.5) / half
                     pts.append((x1 + int(0.1 * (x2 - x1)), int(y1 + frac * (y2 - y1))))
+                else:
+                    frac = (i - half + 0.5) / max(1, n - half)
+                    pts.append((x2 - int(0.1 * (x2 - x1)), int(y1 + frac * (y2 - y1))))
                     
