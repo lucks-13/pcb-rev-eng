@@ -14,4 +14,6 @@ def ord_corners(pts : np.ndarray) -> np.ndarray:
 def warp_board(img : np.ndarray, corners : np.ndarray, out_size = (1600, 1200)) -> np.ndarray:
     src = ord_corners(np.array(corners, dtype = "float32"))
     w, h = out_size
-    dst = np.array([[]]) 
+    dst = np.array([[0,0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]], dtype = "float32")
+    M = cv2.getPerspectiveTransform(src, dst)
+    return cv2.wrapPerspective(img, M, (()))
