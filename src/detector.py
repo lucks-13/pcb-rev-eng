@@ -107,4 +107,7 @@ class PCBDetector:
         pins : List[PinNode] = []
         auto_idx = 1
         for (side_name, cls_name, bbox), ocr_txt in zip(raw_detections, ocr_outputs):
-            des, ptype, val, fp, conf, review
+            des, ptype, val, fp, conf, review, notes = self.infer_part_metadata(ocr_txt, cls_name)
+            if not des:
+                prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "X")
+                des
