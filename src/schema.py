@@ -28,4 +28,12 @@ class NetEntry:
     confi : float
     flags : List[str] = field(default_factory=list)
 
-@d
+@dataclass
+class BroardDraft:
+    board_name : str
+    img_size : Tuple[int, int]
+    components : List[ComponentItem]
+    pins : List[PinNode]
+    nets : List[NetEntry]
+    def to_dict(self) -> Dict:
+        return asdict(self)
