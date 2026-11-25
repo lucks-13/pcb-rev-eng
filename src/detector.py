@@ -18,4 +18,11 @@ class PCBDetector:
         if PaddleOCR is not None:
             self.ocr = PaddleOCR(use_angle_cls = True, lang = "en", use_gpu = use_gpu, show_log = False)
 
-    def run_ocr_crops(self, img : np.ndarray, boxes : List[Tuple[int, int, int, int]])
+    def run_ocr_crops(self, img : np.ndarray, boxes : List[Tuple[int, int, int, int]]) -> List[str]:
+        if self.ocr is None:
+            return ["" for _ in boxes]
+        h, w = img.shape[:2]
+        texts : List[str] = []
+        pad = 24
+        for (x1, y1, x2, y2) in boxes:
+            cx1, cy1 = max
