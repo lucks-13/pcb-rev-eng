@@ -31,4 +31,9 @@ def render_debug_overlay(board_dir : Path, out_dir : Path) -> None:
         prefix = f"{c['designator']}"
         sides = {s for pid, s in pin_sides.items() if pid.startswith(prefix)}
         target = btm_vis if sides == {"bottom"} else top_vis
-        cv2.rectangle(target, (x1, y1), )
+        cv2.rectangle(target, (x1, y1), (x2, y2), color, 2)
+        cv2.putText(target, label, (x1, max(15, y1 - 6)), cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
+    cv2.imwrite(str(out_dir / "top_overlay.png"), top_vis)
+    cv2.imwrite(str(out_dir / "bottom_overlay.png"), btm_vis)
+
+def re_export_from_edited_json(out_dir : Path)
