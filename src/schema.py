@@ -24,4 +24,8 @@ class ComponentItem:
 @dataclass
 class NetEntry:
     net_name : str
-    pins
+    pins : List[str]
+    confi : float
+    flags : List[str] = field(default_factory=list)
+
+@d
