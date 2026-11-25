@@ -24,4 +24,7 @@ def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
     kp1, des1 = orb.detectAndCompute(top_img, None)
     kp2, des2 = orb.detectAndCompute(flipped, None)
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck = True)
-    matches = sorted(bf.match(des1, des2), key = lambda )
+    matches = sorted(bf.match(des1, des2), key = lambda m : m.distance)[:200]
+    src_pts : np.float32([kp2[m.trainIdx].pt for m in matches]).reshape(-1, 1, 2)
+    dst_pts : np.float32([kp1[m.trainIdx].pt for m in matches]).reshape(-1, 1, 2)
+    H, _ = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, ) 
