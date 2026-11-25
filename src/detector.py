@@ -44,6 +44,9 @@ class PCBDetector:
 
     def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, float, bool, str]:
         upper = ocr_text.upper()
-        
+        for part_key, info in self.parts_db.get("known_parts", {}).items():
+            if part_key.upper() in upper:
+                des_match = re.search(r"\bU\d+\b", upper)
+                des = des_match.group(0) if des_match else f"U_{}"
     
     
