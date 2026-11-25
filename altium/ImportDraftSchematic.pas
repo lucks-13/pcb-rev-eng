@@ -39,4 +39,11 @@ Begin
     Result := '';
     Fields := TStringList.Create;
     Try
-        For Idx := 1 To NetLines.Count - 1 
+        For Idx := 1 To NetLines.Count - 1 Do
+        Begin
+            If TrimStr(NetLines[Idx]) = '' Then Continue;
+            SplitCSVLine(NetLines[Idx], Fields);
+            If Fields.Count >= 3 Then
+            Begin
+                NetName := Fields[0];
+                R
