@@ -15,4 +15,6 @@ def render_debug_overlay(board_dir : Path, out_dir : Path) -> None:
     if top_vis is None or btm_vis is None:
         raise FileNotFoundError("Missing aligned images in output folder.")
     pin_sides = {p["pin_id"] : p["side"] for p in data.get("pins", [])}
-    
+    for p in data.get("pins", []):
+        x, y = p["xy"]
+        if p["side"] == "through"
