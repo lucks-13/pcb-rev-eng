@@ -90,4 +90,8 @@ Begin
         ShowMessage('Schematic server is not active.');
         Exit;
     End;
-    SchDoc := SchServer.G
+    SchDoc := SchServer.GetCurrentSchDocument;
+    If (SchDoc = Nil) Or (SchDoc.PinObjectId <> eSchematic) Then
+    Begin
+        ShowMessage('Please open a Schematic (.SchDoc) document first.');
+        Exit
