@@ -16,4 +16,8 @@ def warp_board(img : np.ndarray, corners : np.ndarray, out_size = (1600, 1200)) 
     w, h = out_size
     dst = np.array([[0,0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]], dtype = "float32")
     M = cv2.getPerspectiveTransform(src, dst)
-    return cv2.wrapPerspective(img, M, (()))
+    return cv2.wrapPerspective(img, M, (w, h))
+
+def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
+    flipped = cv2.flip(btm_img, 1)
+    orb = cv2.
