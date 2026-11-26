@@ -80,5 +80,8 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
                 "  (stroke (width 0.15) (type default))",
                 f"  (uuid {uid()})",
                 "  )",
-                f'  (text "{esc(p.pin_num)}" (at {round((px_body + px_end) / 2, 2)} {round(py - 1.2, 2)}))'
+                f'  (text "{esc(p.pin_num)}" (at {round((px_body + px_end) / 2, 2)} {round(py - 1.2, 2)} 0) (effects (font (size 1.0 1.0))))'
             ])
+            net_name = net_lookup.get((comp.designator, p.pin_num), "")
+            if net_name:
+                lines.append(f'  (label "{esc(net_name)}" (at {px_end} {}))')
