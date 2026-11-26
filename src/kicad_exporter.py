@@ -52,5 +52,9 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             f"  (start {x1} {y1})",
             f"  (end {x2} {x2})",
             "  (stoke (width 0.25) (type default))",
-            "  (fill (type ))"
+            "  (fill (type none))",
+            f"  (uuid {uid()})",
+            "  )",
+            f'  (text "{esc(comp.designator)}" (at {cx} {round(y1 - 2.5, 2)} 0) (effects (font (size 1.5 1.5))))',
+            f' '
         ])
