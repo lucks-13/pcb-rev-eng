@@ -26,13 +26,21 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
     out_dir.mkdir(parents = True, exist_ok = True)
     sch_path = out_dir / f"{draft.board_name}.kicad_sch"
     net_lookup = build_net_lookup(draft)
-    lines : List[str] = [
+    lines: List[str] = [
         "(kicad_sch",
-        "   (version 20231120)",
-        '   (generator "pcb_rev_eng_draft")',
-        '   (generator_version "1.0)',
+        "  (version 20231120)",
+        '  (generator "pcb_rev_eng_draft")',
+        '  (generator_version "1.0")',
         f"  (uuid {uid()})",
-        '   (paper "A3")',
-        "   (lib_symbols)",
-        
+        '  (paper "A3")',
+        "  (lib_symbols",
+        "  )"
     ]
+    start_x, start_y = 30.0, 30.0
+    step_x, step_y = 45.0, 35.0
+    cols = 5
+    for idx, comp in enumerate(draft.components):
+        col = idx % cols
+        row = idx // cols
+        cx = round(start_x + col * step_x, 2)
+        cy = round(start_y + col * step_y, 2)
