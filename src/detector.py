@@ -30,13 +30,22 @@ class PCBDetector:
             self.model = YOLO(str(yolo_weights))
         self.ocr = None
         if PaddleOCR is not None:
-            try:
-                self.ocr = PaddleOCR(lang="en", enable_mkldnn=False, use_doc_orientation_classify=False, use_doc_unwarping=False, use_textline_orientation=False)
-            except TypeError:
+            for kw in (
+                {
+
+                },
+                {
+
+                },
+            ):
                 try:
-                    self.ocr = PaddleOCR(use_angle_cls=True, lang="en")
+                    self.ocr = PaddleOCR(**kw)
+                    break
                 except TypeError:
-                    self.ocr = PaddleOCR(lang="en")
+                    continue
+                except Exception:
+                    self.ocr = None
+                    break
 
     def run_ocr_crops(self, img : np.ndarray, boxes : List[Tuple[int, int, int, int]]) -> List[str]:
         if self.ocr is None:
