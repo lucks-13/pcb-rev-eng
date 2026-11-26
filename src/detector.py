@@ -89,14 +89,17 @@ class PCBDetector:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         blur = cv2.GaussianBlur(gray, (5, 5), 0)
         edges = cv2.Canny(blur, 50, 150)
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (7, 7))
-        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 2)
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 1)
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         candidates: List[Tuple[int, Tuple[int, int, int, int]]] = []
         min_area = int(0.002 * w * h)
         max_area = int(0.12 * w * h)
+        border = 6
         for cnt in contours:
             x, y, bw, bh = cv2.boundingRect(cnt)
+            x2, y2 = x + bw, y + bh
+            if x <= border or y <= border or x2 >= w - border or 
             area = bw * bh
             if not (min_area <= area <= max_area):
                 continue
