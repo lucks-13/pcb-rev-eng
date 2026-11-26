@@ -1,3 +1,7 @@
 import shutil
 import subprocess
-im
+import zipfile
+from pathlib import Path
+from typing import Optional
+
+def find_kicad_cli(custom_cli : Optional[str] )
