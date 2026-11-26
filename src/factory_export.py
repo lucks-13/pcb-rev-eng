@@ -24,4 +24,6 @@ def export_factory_package(board_name : str, out_dir : Path, kicad_cli_path : Op
     if fab_dir.exists():
         shutil.rmtree(fab_dir)
     fab_dir.mkdir(parents = True, exist_ok = True)
-    subprocess.
+    subprocess.run([cli, "pcb", "export", "gerbers", "--output", str(fab_dir) + "/", str(pcb_path)], check = True)
+    subprocess.run([cli, "pcb", "export", "drill", "--output", str(fab_dir) + "/", str(pcb_path)], check = True)
+    btm_src = o
