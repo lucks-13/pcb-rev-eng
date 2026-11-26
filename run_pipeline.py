@@ -9,6 +9,7 @@ from src.detector import PCBDetector
 from src.graph_builder import build_netlist
 from src.exporters import export_draft
 from src.review_overlay import render_debug_overlay
+from src.factory_export import export_factory_package
 import os
 
 os.environ.setdefault("FLAGS_use_mkldnn", "0")
@@ -32,6 +33,8 @@ def main():
     parser = argparse.ArgumentParser(description = "Local 2-layer PCB image to draft & netlist")
     parser.add_argument("--board", required = True, help = "Folder name under data/boards/")
     parser.add_argument("--weights", default = "", help = "Optional path to YOLO .pt weights")
+    parser.add_argument("--out-dir", default = "", help = "Optional custom output dir.")
+    parser.add_argument("--package-factory", action = "store_true", help = "Export ")
     args = parser.parse_args()
     board_dir = Path("data/boards") / args.board
     out_dir = Path("outputs") / args.board

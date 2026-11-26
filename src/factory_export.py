@@ -32,4 +32,5 @@ def export_factory_package(board_name : str, out_dir : Path, kicad_cli_path : Op
     zip_path = out_dir / f"{board_name}_factory.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for file_path in sorted(fab_dir.rglob("*")):
-            zf.wr
+            zf.write(file_path, arcname = file_path.relative_to(fab_dir))
+    return zip_path
