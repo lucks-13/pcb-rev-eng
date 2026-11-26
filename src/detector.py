@@ -36,7 +36,7 @@ class PCBDetector:
                     "enable_mkldnn" : False,
                     "use_doc_orientation_classify" : False,
                     "use_doc_unwarping" : False,
-                    "use_textt"
+                    "use_textline_orientation" : False,
 
                 },
                 {
@@ -58,7 +58,7 @@ class PCBDetector:
             return ["" for _ in boxes]
         h, w = img.shape[:2]
         texts : List[str] = []
-        pad = 24
+        pad = 28
         for (x1, y1, x2, y2) in boxes:
             cx1, cy1 = max(0, x1 - pad), max(0, y1 - pad)
             cx2, cy2 = min(w, x2 + pad), min(h, y2 + pad)
@@ -67,23 +67,25 @@ class PCBDetector:
                 texts.append("")
                 continue
             crop_up = cv2.resize(crop, None, fx = 2.0, fy = 2.0, interpolation = cv2.INTER_CUBIC)
-            found = []
-            if hasattr(self.ocr, "predict"):
-                res = self.ocr.predict(crop_up)
-                if res:
-                    for item in res:
-                        text_list = item.get("rec_texts", []) if isinstance(item, dict) else getattr(item, "rec_texts", [])
-                        scores_list = item.get("rec_scores", []) if isinstance(item, dict) else getattr(item, "rec_scores", [])
-                        for txt, conf in zip(text_list, scores_list):
-                            if float(conf) >= 0.45 and str(txt).strip():
-                                found.append(str(txt).strip())
-            else:
-                result = self.ocr.ocr(crop_up, cls = True)
-                if result and result[0]:
-                    for line in result[0]:
-                        txt, conf = line[1][0], line[1][1]
-                        if conf >= 0.45 and txt.strip():
-                            found.append(txt.strip())
+            found : List = []
+            try:
+                if hasattr(self.ocr, "predict"):
+                    res = self.ocr.predict(crop_up)
+                    if res:
+                        for item in res:
+                            text_list = item.get("rec_texts", []) if isinstance(item, dict) else getattr(item, "rec_texts", [])
+                            scores_list = item.get("rec_scores", []) if isinstance(item, dict) else getattr(item, "rec_scores", [])
+                            for txt, conf in zip(text_list, scores_list):
+                                if float(conf) >= 0.45 and str(txt).strip():
+                                    found.append(str(txt).strip())
+                else:
+                    result = self.ocr.ocr(crop_up, cls = True)
+                    if result and result[0]:
+                        for line in result[0]:
+                            txt, conf = line[1][0], line[1][1]
+                            if conf >= 0.45 and txt.strip():
+                                found.append(txt.strip())
+            except Exception
             texts.append(" | ".join(found))
         return texts
 
