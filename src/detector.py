@@ -90,11 +90,11 @@ class PCBDetector:
         blur = cv2.GaussianBlur(gray, (5, 5), 0)
         edges = cv2.Canny(blur, 50, 150)
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 1)
+        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 2)
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         candidates: List[Tuple[int, Tuple[int, int, int, int]]] = []
-        min_area = int(0.002 * w * h)
-        max_area = int(0.12 * w * h)
+        min_area = max(400, int(0.0005 * w * h))
+        max_area = int(0.15 * w * h)
         border = 6
         for cnt in contours:
             x, y, bw, bh = cv2.boundingRect(cnt)
@@ -105,7 +105,7 @@ class PCBDetector:
             if not (min_area <= area <= max_area):
                 continue
             aspect = bw / max(1, bh)
-            if not (0.35 <= aspect <= 3.5):
+            if not (0.25 <= aspect <= 4.0):
                 continue
             candidates.append((area, (x, y, x2, y2)))
         candidates.sort(key = lambda item : item[0], reverse = True)
@@ -114,7 +114,7 @@ class PCBDetector:
             if any(self.iou(box, prev) > 0.4 for prev in selected):
                 continue
             selected.append(box)
-            if len(selected) >= 15:
+            if len(selected) >= 20:
                 break
         return [("candidate", box) for box in selected]
 
