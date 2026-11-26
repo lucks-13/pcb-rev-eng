@@ -15,4 +15,8 @@ def main():
         re_export_from_edited_json(out_dir)
         print(f"Re-exported bom.csv and netlist.csv in {out_dir}")
 
-    render_debug_overlay(board_dir, )
+    render_debug_overlay(board_dir, out_dir)
+    print(f"Updated overlays in {out_dir}")
+
+if __name__ == "__main__":
+    main()
