@@ -84,13 +84,13 @@ class PCBDetector:
             return designator, ptype, val,fp, 0.70, needs_review, notes
         return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part; OCR : {ocr_text}" if ocr_text else "Unclassified part; no OCR text")
 
-    def fallback_boxes(self, img : np.ndarray) -> List[Tuple[str, Tuple[int, int, int, int]]]:
+    def fallback_boxes(self, img: np.ndarray) -> List[Tuple[str, Tuple[int, int, int, int]]]:
         h, w = img.shape[:2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         blur = cv2.GaussianBlur(gray, (5, 5), 0)
         edges = cv2.Canny(blur, 50, 150)
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 2)
+        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations=2)
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         candidates: List[Tuple[int, Tuple[int, int, int, int]]] = []
         min_area = max(400, int(0.0005 * w * h))
@@ -108,8 +108,8 @@ class PCBDetector:
             if not (0.25 <= aspect <= 4.0):
                 continue
             candidates.append((area, (x, y, x2, y2)))
-        candidates.sort(key = lambda item : item[0], reverse = True)
-        selected : List[Tuple[int, int, int, int]] = []
+        candidates.sort(key=lambda item: item[0], reverse=True)
+        selected: List[Tuple[int, int, int, int]] = []
         for _, box in candidates:
             if any(self.iou(box, prev) > 0.4 for prev in selected):
                 continue
@@ -131,25 +131,26 @@ class PCBDetector:
         area_b = max(1, (bx2 - bx1) * (by2 - by1))
         return inter / float(area_a + area_b - inter)
 
-    def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
+    def gen_pins_for_component(self, comp: ComponentItem, side: str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
         fp_info = self.parts_db.get("footprints", {}).get(comp.footprint)
         pin_labels = fp_info["pins"] if fp_info else ["1", "2"]
-        n =len(pin_labels)
-        pins : List[PinNode] = []
+        n = len(pin_labels)
+        pins: List[PinNode] = []
+        mid_y = (y1 + y2) // 2
         if n == 2:
-            pts = [(x1 + int(0.25 * (x2 - x1)), (y1 + y2) // 2),(x2 - int(0.15 * (x2 - x1)), (y1 + y2) // 2)]
+            pts = [(x1, mid_y), (x2, mid_y)]
         else:
             half = max(1, n // 2)
             pts = []
             for i in range(n):
                 if i < half:
                     frac = (i + 0.5) / half
-                    pts.append((x1 + int(0.1 * (x2 - x1)), int(y1 + frac * (y2 - y1))))
+                    pts.append((x1, int(y1 + frac * (y2 - y1))))
                 else:
                     frac = (i - half + 0.5) / max(1, n - half)
-                    pts.append((x2 - int(0.1 * (x2 - x1)), int(y1 + frac * (y2 - y1))))
-        for label, xy in zip(pin_labels, pts):
+                    pts.append((x2, int(y1 + frac * (y2 - y1))))
+        for label, xy in zip(pin_labels)
             pins.append(PinNode(pin_id = f"{comp.designator}.{label}", designator = comp.designator, pin_num = str(label), side = side, xy = xy, confi = comp.confi * 0.85))
         return pins
 
