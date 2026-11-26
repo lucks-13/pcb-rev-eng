@@ -81,7 +81,9 @@ class PCBDetector:
             return designator, ptype, val,fp, 0.70, needs_review, notes
         return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part; OCR : {ocr_text}" if ocr_text else "Unclassified part; no OCR text")
 
-    
+    def fallback_boxes(self, img : np.ndarray) -> List[Tuple[str, Tuple[int, int, int, int]]]:
+        h, w = img.shape[:2]
+        gray = cv2.cvtColor
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
