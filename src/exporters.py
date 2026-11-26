@@ -22,4 +22,3 @@ def export_draft(draft : BroardDraft, out_dir : Path) -> None:
                     des, pin = pin_ref.split(".", 1)
                     writer.writerow([net.net_name, des, pin, net.confi, ";".join(net.flags)])
     export_kicad_sch(draft, out_dir)
-
