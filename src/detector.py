@@ -94,7 +94,13 @@ class PCBDetector:
         max_area = int(0.12 * w * h)
         for cnt in contours:
             x, y, bw, bh = cv2.boundingRect(cnt)
-             
+            area = bw * bh
+            if not (min_area <= area <= max_area):
+                continue
+            aspect = bw / max(1, bh)
+            if not (0.35 <= aspect <= 3.5):
+                continue
+            candidates.append((area, (x, y, x ))) 
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
