@@ -115,7 +115,14 @@ class PCBDetector:
     def iou(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -> float:
         ax1, ay1, ax2, ay2 = a
         bx1, by1, bx2, by2 = b
-        ix1, iy1 = max(ax1, bx1)
+        ix1, iy1 = max(ax1, bx1), max(ay1, by1)
+        ix2, iy2 = max(ax2, bx2), max(ay2, by2)
+        if ix2 <= ix1 or iy2 <= iy1:
+            return 0.0
+        inter = (ix2 - ix1) * (iy2 - iy1)
+        area_a = max(1, (ax2 - ax1) * (ay2 - ay1))
+        area_b = max(1, (bx2 - bx1) * (by2 - by1))
+        return inter / float(area_a + area_b - inter)
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
