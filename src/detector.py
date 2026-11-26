@@ -108,15 +108,15 @@ class PCBDetector:
             "D" : ("diode", "SOD-123", "D_UNK?"),
             "L" : ("inductor", "0805", "L_UNK?"),
             "J" : ("connector", "HDR-1X4", "CONN_UNK?"),
-            "Q" : ("transistor", ""),
-            "T" : ()
+            "Q" : ("transistor", "SOT-23", "Q_UNK?"),
+            "T" : ("transistor", "SOT-23", "T_UNK?")
         }
         if prefix in type_map:
             ptype, fp, val = type_map[prefix]
-            needs_review = ptype in ("capacitor", "inductor", "ic")
-            notes = f"OCR : {ocr_text}" if ocr_text else "No OCR text; verify value/footprint"
-            return designator, ptype, val,fp, 0.70, needs_review, notes
-        return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part; OCR : {ocr_text}" if ocr_text else "Unclassified part; no OCR text")
+            needs_review = ptype in ("capacitor", "inductor", "ic", "transistor")
+            notes = f"OCR : {ocr_text}" if ocr_text else "Designator inferred, verify value/footprint"
+            return designator, ptype, val,fp, 0.75, needs_review, notes
+        return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part, OCR : {ocr_text}" if ocr_text else "Unclassified part, no OCR text")
 
     def fallback_boxes(self, img: np.ndarray) -> List[Tuple[str, Tuple[int, int, int, int]]]:
         h, w = img.shape[:2]
