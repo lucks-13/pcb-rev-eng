@@ -61,4 +61,9 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
         ])
         if comp.needs_review:
             lines.append(f'  (text "[REVIEW]" (at {cx} {round(y1 - 5.0, 2)} 0) (effects (font (size 1.27 1.27) (bold yes))))')
-        comp_pins = [p for p in draft]
+        comp_pins = [p for p in draft.pins if p.designator == comp.designator]
+        if not comp_pins:
+            comp_pins = []
+        pin_count = max(1, len(comp_pins))
+        for p_idx, p in enumerate(comp_pins):
+            frac = 
