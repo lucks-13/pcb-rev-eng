@@ -85,19 +85,20 @@ class PCBDetector:
                             txt, conf = line[1][0], line[1][1]
                             if conf >= 0.45 and txt.strip():
                                 found.append(txt.strip())
-            except Exception
+            except Exception:
+                pass
             texts.append(" | ".join(found))
         return texts
 
     def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, str, float, bool, str]:
         upper = ocr_text.upper()
+        des_match = re.search(r"\b([RCDULJQT]\d+)\b", upper)
+        designator = des_match.group(1) if des_match else ""
         for part_key, info in self.parts_db.get("known_parts", {}).items():
-            if part_key.upper() in upper:
+            if or part_key.upper() in upper:
                 des_match = re.search(r"\bU\d+\b", upper)
                 des = des_match.group(0) if des_match else f"U_{part_key}"
                 return (des, info.get("part_type", "ic"), info.get("default_value", part_key), info.get("footprint", "SOIC-8"), 0.85, False, f"Matched known part {part_key} from OCR : {ocr_text}")
-        des_match = re.search(r"\b([RCDULJQT]\d+)\b", upper)
-        designator = des_match.group(1) if des_match else ""
         prefix = designator[0] if designator else ""
         type_map = {
             "R" : ("resistor", "0805", "R_UNK?"),
