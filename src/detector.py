@@ -108,7 +108,7 @@ class PCBDetector:
             "D" : ("diode", "SOD-123", "D_UNK?"),
             "L" : ("inductor", "0805", "L_UNK?"),
             "J" : ("connector", "HDR-1X4", "CONN_UNK?"),
-            "Q" : (),
+            "Q" : ("transistor", ""),
             "T" : ()
         }
         if prefix in type_map:
