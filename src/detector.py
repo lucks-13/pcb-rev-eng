@@ -95,7 +95,10 @@ class PCBDetector:
         des_match = re.search(r"\b([RCDULJQT]\d+)\b", upper)
         designator = des_match.group(1) if des_match else ""
         for part_key, info in self.parts_db.get("known_parts", {}).items():
-            if or part_key.upper() in upper:
+            if re.search(rf"\b{re.escape(part_key.upper())}\b", upper) or part_key.upper() in upper:
+                ptype = info.get("part_type", "ic")
+                default_prefix = {}
+                
                 des_match = re.search(r"\bU\d+\b", upper)
                 des = des_match.group(0) if des_match else f"U_{part_key}"
                 return (des, info.get("part_type", "ic"), info.get("default_value", part_key), info.get("footprint", "SOIC-8"), 0.85, False, f"Matched known part {part_key} from OCR : {ocr_text}")
