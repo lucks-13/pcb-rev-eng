@@ -32,10 +32,16 @@ class PCBDetector:
         if PaddleOCR is not None:
             for kw in (
                 {
+                    "lang" : "en",
+                    "enable_mkldnn" : False,
+                    "use_doc_orientation_classify" : False,
+                    "use_doc_unwarping" : False,
+                    "use_textt"
 
                 },
                 {
-
+                    {"use_angle_cls" : True, "lang" : "en"},
+                    {"lang" : "en"},
                 },
             ):
                 try:
