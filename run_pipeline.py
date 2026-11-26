@@ -38,7 +38,7 @@ def main():
     parser.add_argument("--kicad-cli", default = "", help = "Optional path to kicad cli executable")
     args = parser.parse_args()
     board_dir = Path("data/boards") / args.board
-    out_dir = Path("outputs") / args.board
+    out_dir = Path(args.out_dir) if args.out_dir else (Path("outputs") / args.board)
     out_dir.mkdir(parents = True, exist_ok = True)
     top_raw = cv2.imread(str(board_dir / "top.png"))
     btm_raw = cv2.imread(str(board_dir / "bottom.png"))
