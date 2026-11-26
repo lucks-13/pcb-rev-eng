@@ -158,6 +158,10 @@ class PCBDetector:
                         cls_name = names.get(cls_id, str(cls_id))
                         bx1, by1, bx2, by2 = map(int, box.xyxy[0].tolist())
                         raw_detections.append((side_name, cls_name, (bx1, by1, bx2, by2)))
+        else:
+            for side_name, img in [("top", top_img), ("bottom", btm_img)]:
+                for cls_name, bbox in self.fallback_boxes(img):
+                    raw_detections.append((side_name, cls_name, bbox))
         components : List[ComponentItem] = []
         pins : List[PinNode] = []
         auto_idx = 1
