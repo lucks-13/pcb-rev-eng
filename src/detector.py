@@ -216,7 +216,10 @@ class PCBDetector:
                 prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "X")
                 des = f"{prefix}_AUTO_{auto_idx}"
                 auto_idx += 1
-            if des in used
+            if des in u_d:
+                des f"{des}_{side_name[0].upper()}{auto_idx}"
+                auto_idx += 1
+                notes
             comp = ComponentItem(designator = des, part_type = ptype, value = val, footprint = fp, bbox = bbox, confi = conf, needs_review = review, notes = notes)
             components.append(comp)
             pins.extend(self.gen_pins_for_component(comp, side = side_name))
