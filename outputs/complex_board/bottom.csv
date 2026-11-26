@@ -1,0 +1,3 @@
+Designator,PartType,Value,Footprint,Confidence,NeedsReview,Notes
+U1,ic,LM358,SOIC-8,0.85,False,Matched known part LM358 from OCR : R1 | ● | _ | LM358 U1 | C1 | ●
+X_AUTO_1,candidate,UNK?,UNKNOWN,0.4,True,Unclassified part; no OCR text

@@ -1,0 +1,152 @@
+{
+  "board_name": "complex_board",
+  "img_size": [
+    1600,
+    1200
+  ],
+  "components": [
+    {
+      "designator": "U1",
+      "part_type": "ic",
+      "value": "LM358",
+      "footprint": "SOIC-8",
+      "bbox": [
+        248,
+        218,
+        851,
+        583
+      ],
+      "confi": 0.85,
+      "notes": "Matched known part LM358 from OCR : R1 | \u25cf | _ | LM358 U1 | C1 | \u25cf",
+      "needs_review": false
+    },
+    {
+      "designator": "X_AUTO_1",
+      "part_type": "candidate",
+      "value": "UNK?",
+      "footprint": "UNKNOWN",
+      "bbox": [
+        472,
+        0,
+        815,
+        276
+      ],
+      "confi": 0.4,
+      "notes": "Unclassified part; no OCR text",
+      "needs_review": true
+    }
+  ],
+  "pins": [
+    {
+      "pin_id": "U1.1",
+      "designator": "U1",
+      "pin_num": "1",
+      "side": "top",
+      "xy": [
+        308,
+        263
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "U1.2",
+      "designator": "U1",
+      "pin_num": "2",
+      "side": "top",
+      "xy": [
+        308,
+        354
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "U1.3",
+      "designator": "U1",
+      "pin_num": "3",
+      "side": "top",
+      "xy": [
+        308,
+        446
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "U1.4",
+      "designator": "U1",
+      "pin_num": "4",
+      "side": "top",
+      "xy": [
+        308,
+        537
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "U1.5",
+      "designator": "U1",
+      "pin_num": "5",
+      "side": "top",
+      "xy": [
+        791,
+        263
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "U1.6",
+      "designator": "U1",
+      "pin_num": "6",
+      "side": "top",
+      "xy": [
+        791,
+        354
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "U1.7",
+      "designator": "U1",
+      "pin_num": "7",
+      "side": "top",
+      "xy": [
+        791,
+        446
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "U1.8",
+      "designator": "U1",
+      "pin_num": "8",
+      "side": "top",
+      "xy": [
+        791,
+        537
+      ],
+      "confi": 0.7224999999999999
+    },
+    {
+      "pin_id": "X_AUTO_1.1",
+      "designator": "X_AUTO_1",
+      "pin_num": "1",
+      "side": "bottom",
+      "xy": [
+        557,
+        138
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_1.2",
+      "designator": "X_AUTO_1",
+      "pin_num": "2",
+      "side": "bottom",
+      "xy": [
+        764,
+        138
+      ],
+      "confi": 0.34
+    }
+  ],
+  "nets": []
+}

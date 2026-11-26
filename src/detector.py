@@ -18,12 +18,12 @@ class PCBDetector:
         self.ocr = None
         if PaddleOCR is not None:
             try:
-                self.ocr = PaddleOCR(use_angle_cls = True, lang = "en", enable_mkldnn = False, use_doc_orientation_classify = False, use_doc_unwarping = False, use_textline_orientation = False)
+                self.ocr = PaddleOCR(lang="en", enable_mkldnn=False, use_doc_orientation_classify=False, use_doc_unwarping=False, use_textline_orientation=False)
             except TypeError:
                 try:
-                    self.ocr = PaddleOCR(use_angle_cls = True, lang = "en")
+                    self.ocr = PaddleOCR(use_angle_cls=True, lang="en")
                 except TypeError:
-                    self.ocr = PaddleOCR(lang = "en")
+                    self.ocr = PaddleOCR(lang="en")
 
     def run_ocr_crops(self, img : np.ndarray, boxes : List[Tuple[int, int, int, int]]) -> List[str]:
         if self.ocr is None:
