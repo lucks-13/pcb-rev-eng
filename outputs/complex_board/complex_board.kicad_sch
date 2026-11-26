@@ -1,0 +1,122 @@
+(kicad_sch
+  (version 20231120)
+  (generator "pcb_rev_eng_draft")
+  (generator_version "1.0")
+  (uuid 193541cb-f441-4908-a21e-56e48d0cf796)
+  (paper "A3")
+  (lib_symbols
+  )
+  (rectangle
+  (start 22.0 24.0)
+  (end 38.0 36.0)
+  (stroke (width 0.25) (type default))
+  (fill (type none))
+  (uuid 94055892-4087-4ecb-b043-8c6d911ed74d)
+  )
+  (text "U1" (at 30.0 21.5 0) (effects (font (size 1.5 1.5))))
+  (text "LM358" (at 30.0 33.5 0) (effects (font (size 1.27 1.27))))
+  (text "FP : SOIC-8" (at 30.0 31.0 0) (effects (font (size 1.0 1.0)) (justify left)))
+  (wire
+  (pts
+  (xy 22.0 24.75)
+  (xy 18.0 24.75)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid b94904db-c3df-46b9-ad82-42822e1d8f70)
+  )
+  (text "1" (at 20.0 23.55 0) (effects (font (size 1.0 1.0))))
+  (wire
+  (pts
+  (xy 22.0 26.25)
+  (xy 18.0 26.25)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid 726b61a6-0d47-41e0-83be-01a405ceaf79)
+  )
+  (text "2" (at 20.0 25.05 0) (effects (font (size 1.0 1.0))))
+  (wire
+  (pts
+  (xy 22.0 27.75)
+  (xy 18.0 27.75)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid 1e31d047-4053-4cd3-b843-26474fd19e9c)
+  )
+  (text "3" (at 20.0 26.55 0) (effects (font (size 1.0 1.0))))
+  (label "NET_001" (at 18.0 27.75 0) (effects (font (size 1.27 1.27)) (justify right)))
+  (wire
+  (pts
+  (xy 22.0 29.25)
+  (xy 18.0 29.25)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid 456511cf-38d8-4dcd-a153-9c9741b6012d)
+  )
+  (text "4" (at 20.0 28.05 0) (effects (font (size 1.0 1.0))))
+  (wire
+  (pts
+  (xy 38.0 30.75)
+  (xy 42.0 30.75)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid 30af7681-4af1-4a79-9b53-42bf199d37bb)
+  )
+  (text "5" (at 40.0 29.55 0) (effects (font (size 1.0 1.0))))
+  (wire
+  (pts
+  (xy 38.0 32.25)
+  (xy 42.0 32.25)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid 833df8ff-89fd-490f-b452-3874b255d501)
+  )
+  (text "6" (at 40.0 31.05 0) (effects (font (size 1.0 1.0))))
+  (wire
+  (pts
+  (xy 38.0 33.75)
+  (xy 42.0 33.75)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid aaf8736f-6081-4789-a96c-544cbc21d184)
+  )
+  (text "7" (at 40.0 32.55 0) (effects (font (size 1.0 1.0))))
+  (wire
+  (pts
+  (xy 38.0 35.25)
+  (xy 42.0 35.25)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid 09db3b8e-8422-4674-95fa-ee23c39f8acf)
+  )
+  (text "8" (at 40.0 34.05 0) (effects (font (size 1.0 1.0))))
+  (label "NET_001" (at 42.0 35.25 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (rectangle
+  (start 67.0 24.0)
+  (end 83.0 36.0)
+  (stroke (width 0.25) (type default))
+  (fill (type none))
+  (uuid 5975cec8-b1ea-45c0-a3e4-04cc16b6a14f)
+  )
+  (text "X_AUTO_1" (at 75.0 21.5 0) (effects (font (size 1.5 1.5))))
+  (text "UNK?" (at 75.0 33.5 0) (effects (font (size 1.27 1.27))))
+  (text "FP : UNKNOWN" (at 75.0 31.0 0) (effects (font (size 1.0 1.0)) (justify left)))
+  (text "[REVIEW]" (at 75.0 19.0 0) (effects (font (size 1.27 1.27) (bold yes))))
+  (wire
+  (pts
+  (xy 67.0 27.0)
+  (xy 63.0 27.0)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid 8040adc9-206e-4177-ab3b-dba1847d6e30)
+  )
+  (text "1" (at 65.0 25.8 0) (effects (font (size 1.0 1.0))))
+  (wire
+  (pts
+  (xy 83.0 33.0)
+  (xy 87.0 33.0)
+  )
+  (stroke (width 0.15) (type default))
+  (uuid b43ec7a1-5942-4cb9-bc6d-5588b8a1d4a5)
+  )
+  (text "2" (at 85.0 31.8 0) (effects (font (size 1.0 1.0))))
+)
