@@ -206,6 +206,7 @@ class PCBDetector:
                     raw_detections.append((side_name, cls_name, bbox))
         components : List[ComponentItem] = []
         pins : List[PinNode] = []
+        u_d : Set[str] = set()
         auto_idx = 1
         for side_name, cls_name, bbox in raw_detections:
             src_img = top_img if side_name == "top" else btm_img
@@ -215,6 +216,7 @@ class PCBDetector:
                 prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "X")
                 des = f"{prefix}_AUTO_{auto_idx}"
                 auto_idx += 1
+            if des in used
             comp = ComponentItem(designator = des, part_type = ptype, value = val, footprint = fp, bbox = bbox, confi = conf, needs_review = review, notes = notes)
             components.append(comp)
             pins.extend(self.gen_pins_for_component(comp, side = side_name))
