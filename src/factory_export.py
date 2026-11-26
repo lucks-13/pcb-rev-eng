@@ -13,4 +13,7 @@ def find_kicad_cli(custom_cli : Optional[str] = None) -> str:
     win_default = Path(r"C:\Program Files\KiCad\8.0\bin\kicad-cli.exe")
     if win_default.exists():
         return str(win_default)
-    raise FileNotFoundError("")
+    raise FileNotFoundError("Could not find kicad cli")
+
+def export_factory_package(board_name : str, out_dir : Path, kicad_cli_path : Optional[str] = None) -> Path:
+    
