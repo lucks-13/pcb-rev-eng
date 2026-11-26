@@ -157,7 +157,7 @@ class PCBDetector:
         ax1, ay1, ax2, ay2 = a
         bx1, by1, bx2, by2 = b
         ix1, iy1 = max(ax1, bx1), max(ay1, by1)
-        ix2, iy2 = max(ax2, bx2), max(ay2, by2)
+        ix2, iy2 = min(ax2, bx2), min(ay2, by2)
         if ix2 <= ix1 or iy2 <= iy1:
             return 0.0
         inter = (ix2 - ix1) * (iy2 - iy1)
@@ -185,7 +185,7 @@ class PCBDetector:
                     frac = (i - half + 0.5) / max(1, n - half)
                     pts.append((x2, int(y1 + frac * (y2 - y1))))
         for label, xy in zip(pin_labels, pts):
-            pins.append(PinNode(pin_id = f"{comp.designator}.{label}", designator = comp.designator, pin_num = str(label), side = side, xy = xy, confi = comp.confi * 0.85))
+            pins.append(PinNode(pin_id = f"{comp.designator}.{label}", designator = comp.designator, pin_num = str(label), side = side, xy = xy, confi = round(comp.confi * 0.85, 4)))
         return pins
 
     def detect(self, top_img : np.ndarray, btm_img : np.ndarray, vias_xy : List[Tuple[int, int]]) -> Tuple[List[ComponentItem], List[PinNode]]:
