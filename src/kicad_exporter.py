@@ -66,4 +66,8 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             comp_pins = []
         pin_count = max(1, len(comp_pins))
         for p_idx, p in enumerate(comp_pins):
-            frac = 
+            frac = (p_idx + 0.5) / pin_count
+            py = round(y1 + frac * h, 2)
+            left_side = p_idx < (pin_count / 2)
+            px_body = x1 if left_side else x2
+            px_end = round(px_body - 4.0, )
