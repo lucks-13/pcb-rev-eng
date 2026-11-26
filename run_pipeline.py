@@ -34,7 +34,8 @@ def main():
     parser.add_argument("--board", required = True, help = "Folder name under data/boards/")
     parser.add_argument("--weights", default = "", help = "Optional path to YOLO .pt weights")
     parser.add_argument("--out-dir", default = "", help = "Optional custom output dir.")
-    parser.add_argument("--package-factory", action = "store_true", help = "Export ")
+    parser.add_argument("--package-factory", action = "store_true", help = "Export Gerbers")
+    parser.add_argument("--kicad-cli", default = "", help = "Optional path to kicad cli executable")
     args = parser.parse_args()
     board_dir = Path("data/boards") / args.board
     out_dir = Path("outputs") / args.board
@@ -62,5 +63,8 @@ def main():
     export_draft(draft, out_dir)
     render_debug_overlay(board_dir, out_dir)
     print(f"Done. Exported {len(components)} components, {len(pins)} pins, {len(nets)} nets to {out_dir}")
+    if args.package_factory:
+        zip_file = export_factory_package(board_name = args.board, out_dir = out_dir, kicad_cli_path = args.kicad_cli or None)
+        print(f"Packaged factory bundle : {zip_file}")
 if __name__ == "__main__":
     main()
