@@ -46,4 +46,7 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
         cy = round(start_y + col * step_y, 2)
         w, h = 16.0, 12.0
         x1, y1 = round(cx - w / 2, 2), round(cy - h / 2, 2)
-        x2, y2 = round(cx + w / 2)
+        x2, y2 = round(cx + w / 2, 2), round(cy + h / 2, 2)
+        lines.extend([
+            "  (rectangle"
+        ])
