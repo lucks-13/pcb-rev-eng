@@ -12,7 +12,8 @@ from src.review_overlay import render_debug_overlay
 import os
 
 os.environ.setdefault("FLAGS_use_mkldnn", "0")
-
+os.environ.setdefault("PADDLE_PDX_ENABLE_MKDNN", "False")
+os.environ.setdefault("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK", "True")
 
 def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[int, int]]:
     overlap = cv2.bitwise_and(top_mask, btm_mask)
