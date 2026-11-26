@@ -26,10 +26,10 @@
       "value": "UNK?",
       "footprint": "UNKNOWN",
       "bbox": [
-        472,
-        0,
-        815,
-        276
+        761,
+        144,
+        928,
+        385
       ],
       "confi": 0.4,
       "notes": "Unclassified part; no OCR text",
@@ -131,8 +131,8 @@
       "pin_num": "1",
       "side": "bottom",
       "xy": [
-        557,
-        138
+        802,
+        264
       ],
       "confi": 0.34
     },
@@ -142,11 +142,21 @@
       "pin_num": "2",
       "side": "bottom",
       "xy": [
-        764,
-        138
+        903,
+        264
       ],
       "confi": 0.34
     }
   ],
-  "nets": []
+  "nets": [
+    {
+      "net_name": "NET_001",
+      "pins": [
+        "U1.3",
+        "U1.8"
+      ],
+      "confi": 0.8,
+      "flags": []
+    }
+  ]
 }

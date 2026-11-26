@@ -99,14 +99,15 @@ class PCBDetector:
         for cnt in contours:
             x, y, bw, bh = cv2.boundingRect(cnt)
             x2, y2 = x + bw, y + bh
-            if x <= border or y <= border or x2 >= w - border or 
+            if x <= border or y <= border or x2 >= w - border or y2 >= h - border:
+                continue
             area = bw * bh
             if not (min_area <= area <= max_area):
                 continue
             aspect = bw / max(1, bh)
             if not (0.35 <= aspect <= 3.5):
                 continue
-            candidates.append((area, (x, y, x + bw, y + bh)))
+            candidates.append((area, (x, y, x2, y2)))
         candidates.sort(key = lambda item : item[0], reverse = True)
         selected : List[Tuple[int, int, int, int]] = []
         for _, box in candidates:

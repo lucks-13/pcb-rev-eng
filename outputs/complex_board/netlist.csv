@@ -1,1 +1,3 @@
 NetName,Designator,Pin,Confidence,Flags
+NET_001,U1,3,0.8,
+NET_001,U1,8,0.8,
