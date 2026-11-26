@@ -9,6 +9,10 @@ from src.detector import PCBDetector
 from src.graph_builder import build_netlist
 from src.exporters import export_draft
 from src.review_overlay import render_debug_overlay
+import os
+
+os.environ.setdefault("FLAGS_use_mkldnn", "0")
+
 
 def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[int, int]]:
     overlap = cv2.bitwise_and(top_mask, btm_mask)
