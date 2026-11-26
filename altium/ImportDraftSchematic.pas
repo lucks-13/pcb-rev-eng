@@ -76,8 +76,8 @@ End;
 Procedure ImportDraftFromFolder(Const FolderPath : String);
 Var
   SchDoc : ISch_Document;
-  BomLines, NetLines, Fields : TStringList;
-  BomPath, NetPath : String;
+  BtmLines, NetLines, Fields : TStringList;
+  BtmPath, NetPath : String;
   I, ColIdx, RowIdx : Integer;
   Desig, PartType, PartVal, Footprint : String;
   BaseX, BaseY, StepX, StepY, CurX, CurY : TCoord;
@@ -99,20 +99,20 @@ Begin
     Exit;
   End;
 
-  BomPath := IncludeTrailingPathDelimiter(FolderPath) + 'bom.csv';
+  BtmPath := IncludeTrailingPathDelimiter(FolderPath) + 'bottom.csv';
   NetPath := IncludeTrailingPathDelimiter(FolderPath) + 'netlist.csv';
 
-  If (Not FileExists(BomPath)) Or (Not FileExists(NetPath)) Then
+  If (Not FileExists(BtmPath)) Or (Not FileExists(NetPath)) Then
   Begin
-    ShowMessage('Could not find bom.csv or netlist.csv in: ' + FolderPath);
+    ShowMessage('Could not find bottom.csv or netlist.csv in: ' + FolderPath);
     Exit;
   End;
 
-  BomLines := TStringList.Create;
+  BtmLines := TStringList.Create;
   NetLines := TStringList.Create;
   Fields   := TStringList.Create;
   Try
-    BomLines.LoadFromFile(BomPath);
+    BtmLines.LoadFromFile(BtmPath);
     NetLines.LoadFromFile(NetPath);
 
     BaseX := MilsToCoord(1000);
@@ -125,10 +125,10 @@ Begin
       ColIdx := 0;
       RowIdx := 0;
 
-      For I := 1 To BomLines.Count - 1 Do
+      For I := 1 To BtmLines.Count - 1 Do
       Begin
-        If TrimStr(BomLines[I]) = '' Then Continue;
-        SplitCSVLine(BomLines[I], Fields);
+        If TrimStr(BtmLines[I]) = '' Then Continue;
+        SplitCSVLine(BtmLines[I], Fields);
         If Fields.Count < 4 Then Continue;
 
         Desig     := Fields[0];
@@ -179,7 +179,7 @@ Begin
   Finally
     Fields.Free;
     NetLines.Free;
-    BomLines.Free;
+    BtmLines.Free;
   End;
 End;
 
