@@ -17,7 +17,10 @@ class PCBDetector:
             self.model = YOLO(str(yolo_weights))
         self.ocr = None
         if PaddleOCR is not None:
-            self.ocr = PaddleOCR(use_angle_cls = True, lang = "en", use_gpu = use_gpu, show_log = False)
+            try:
+                self.ocr = PaddleOCR(use_angle_cls = True, lang = "en")
+            except TypeError:
+                self.ocr = PaddleOCR(lang = "en")
 
     def run_ocr_crops(self, img : np.ndarray, boxes : List[Tuple[int, int, int, int]]) -> List[str]:
         if self.ocr is None:
@@ -33,15 +36,8 @@ class PCBDetector:
                 texts.append("")
                 continue
             crop_up = cv2.resize(crop, None, fx = 2.0, fy = 2.0, interpolation = cv2.INTER_CUBIC)
-            result  = self.ocr.ocr(crop_up, cls = True)
             found = []
-            if result and result[0]:
-                for line in result[0]:
-                    txt, conf = line[1][0], line[1][1]
-                    if conf >= 0.45 and txt.strip():
-                        found.append(txt.strip())
-            texts.append(" | ".join(found))
-        return texts
+            if 
 
     def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, str, float, bool, str]:
         upper = ocr_text.upper()

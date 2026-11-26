@@ -6,3 +6,5 @@
 /setup-auto-git-push.ps1
 
 .venv/
+.venv312/
+.vscode/
