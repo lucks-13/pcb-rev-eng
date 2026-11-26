@@ -37,7 +37,23 @@ class PCBDetector:
                 continue
             crop_up = cv2.resize(crop, None, fx = 2.0, fy = 2.0, interpolation = cv2.INTER_CUBIC)
             found = []
-            if 
+            if hasattr(self.ocr, "predict"):
+                res = self.ocr.predict(crop_up)
+                if res:
+                    for item in res:
+                        text_list = item.get("rec_texts", []) if isinstance(item, dict) else getattr(item, "rec_texts", [])
+                        scores_list = item.get("rec_scores", []) if isinstance(item, dict) else getattr(item, "rec_scores", [])
+                        for txt, conf in zip(text_list, scores_list):
+                            if float(conf) >= 0.45 and str(txt).strip():
+                                found.append(str(txt).strip())
+            else:
+                result = self.ocr.ocr(crop_up, cls = True)
+                if result and result[0]:
+                    for line in result[0]:
+                        txt, conf = line[1][0], line[1][1]
+                        if conf >= 0.45 and txt.strip():
+                            found.append(txt.strip())
+            texts.append(" | ".join(found))
 
     def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, str, float, bool, str]:
         upper = ocr_text.upper()
@@ -63,7 +79,7 @@ class PCBDetector:
             notes = f"OCR : {ocr_text}" if ocr_text else "No OCR text; verify value/footprint"
             return designator, ptype, val,fp, 0.70, needs_review, notes
         return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part; OCR : {ocr_text}" if ocr_text else "Unclassified part; no OCR text")
-    
+
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
         fp_info = self.parts_db.get("footprints", {}).get(comp.footprint)

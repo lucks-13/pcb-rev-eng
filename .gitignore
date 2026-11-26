@@ -5,6 +5,6 @@
 /.auto_git_push.log
 /setup-auto-git-push.ps1
 
-.venv/
 .venv312/
 .vscode/
+__pycache__/

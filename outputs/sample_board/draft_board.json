@@ -1,0 +1,22 @@
+{
+  "board_name": "sample_board",
+  "img_size": [
+    1600,
+    1200
+  ],
+  "components": [],
+  "pins": [
+    {
+      "pin_id": "VIA_001.1",
+      "designator": "VIA_001",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        339,
+        488
+      ],
+      "confi": 0.75
+    }
+  ],
+  "nets": []
+}
