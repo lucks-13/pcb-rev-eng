@@ -99,7 +99,7 @@ class PCBDetector:
                 ptype = info.get("part_type", "ic")
                 default_prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "U")
                 des = designator or f"{default_prefix}_{part_key.upper()}"
-                return(des, ptype, info.get("default_value", part_key), info.get())
+                return(des, ptype, info.get("default_value", part_key), info.get("footprint", "SOIC-8"), 0.90, False, f"Matched known part {part_key} from OCR : {ocr_text}")            
         prefix = designator[0] if designator else ""
         type_map = {
             "R" : ("resistor", "0805", "R_UNK?"),
@@ -107,7 +107,9 @@ class PCBDetector:
             "U" : ("ic", "SOIC-8", "IC_UNK?"),
             "D" : ("diode", "SOD-123", "D_UNK?"),
             "L" : ("inductor", "0805", "L_UNK?"),
-            "J" : ("connector", "HDR-1X4", "CONN_UNK?")
+            "J" : ("connector", "HDR-1X4", "CONN_UNK?"),
+            "Q" : (),
+            "T" : ()
         }
         if prefix in type_map:
             ptype, fp, val = type_map[prefix]
