@@ -83,7 +83,12 @@ class PCBDetector:
 
     def fallback_boxes(self, img : np.ndarray) -> List[Tuple[str, Tuple[int, int, int, int]]]:
         h, w = img.shape[:2]
-        gray = cv2.cvtColor
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        blur = cv2.GaussianBlur(gray, (5, 5), 0)
+        edges = cv2.Canny(blur, 50, 150)
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (7, 7))
+        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 2)
+        
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
