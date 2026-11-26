@@ -2,6 +2,7 @@ import csv
 import json
 from pathlib import Path
 from .schema import BroardDraft
+from .kicad_exporter import export_kicad_sch
 
 def export_draft(draft : BroardDraft, out_dir : Path) -> None:
     out_dir.mkdir(parents = True, exist_ok = True)
@@ -20,4 +21,5 @@ def export_draft(draft : BroardDraft, out_dir : Path) -> None:
                 if "." in pin_ref:
                     des, pin = pin_ref.split(".", 1)
                     writer.writerow([net.net_name, des, pin, net.confi, ";".join(net.flags)])
+    export_kicad_sch(draft, out_dir)
 

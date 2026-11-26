@@ -86,4 +86,5 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             if net_name:
                 lines.append(f'  (label "{esc(net_name)}" (at {px_end} {py} 0) (fields autoplace) (effects (font (size 1.27 1.27))))')
     lines.append(")")
-    sch_path
+    sch_path.write_text("\n".join(lines) + "\n", encoding = "utf-8")
+    return sch_path
