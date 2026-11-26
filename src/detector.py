@@ -88,6 +88,8 @@ class PCBDetector:
         edges = cv2.Canny(blur, 50, 150)
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (7, 7))
         closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 2)
+        contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        candidates = List[Tuple[int, Tuple[int, int, int, int]]] = []
         
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
