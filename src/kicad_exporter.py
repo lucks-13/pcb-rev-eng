@@ -84,7 +84,7 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             ])
             net_name = net_lookup.get((comp.designator, p.pin_num), "")
             if net_name:
-                lines.append(f'  (label "{esc(net_name)}" (at {px_end} {py} 0) (fields autoplace) (effects (font (size 1.27 1.27))))')
+                lines.append(f'  (label "{esc(net_name)}" (at {px_end} {py} 0) (effects (font (size 1.27 1.27)) (justify {"right" if left_side else "left"})))')
     lines.append(")")
     sch_path.write_text("\n".join(lines) + "\n", encoding = "utf-8")
     return sch_path
