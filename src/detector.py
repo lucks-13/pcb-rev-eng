@@ -100,7 +100,11 @@ class PCBDetector:
             aspect = bw / max(1, bh)
             if not (0.35 <= aspect <= 3.5):
                 continue
-            candidates.append((area, (x, y, x ))) 
+            candidates.append((area, (x, y, x + bw, y + bh)))
+        candidates.sort(key = lambda item : item[0], reverse = True)
+        selected : List[Tuple[int, int, int, int]] = []
+        for _, box in candidates:
+            
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
