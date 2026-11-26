@@ -90,7 +90,11 @@ class PCBDetector:
         closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations = 2)
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         candidates = List[Tuple[int, Tuple[int, int, int, int]]] = []
-        
+        min_area = int(0.002 * w * h)
+        max_area = int(0.12 * w * h)
+        for cnt in contours:
+            x, y, bw, bh = cv2.boundingRect(cnt)
+             
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
