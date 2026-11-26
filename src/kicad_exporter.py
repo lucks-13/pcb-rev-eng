@@ -75,5 +75,10 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
                 "  (wire",
                 "  (pts",
                 f"  (xy {px_body} {py})",
-                f"  "
+                f"  (xy {px_end} {py})",
+                "  )",
+                "  (stroke (width 0.15) (type default))",
+                f"  (uuid {uid()})",
+                "  )",
+                f'  (text "{esc(p.pin_num)}" (at {round((px_body + px_end) / 2, 2)} {round(py - 1.2, 2)}))'
             ])
