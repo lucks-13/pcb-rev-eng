@@ -28,5 +28,11 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
     net_lookup = build_net_lookup(draft)
     lines : List[str] = [
         "(kicad_sch",
-        "   ()"
+        "   (version 20231120)",
+        '   (generator "pcb_rev_eng_draft")',
+        '   (generator_version "1.0)',
+        f"  (uuid {uid()})",
+        '   (paper "A3")',
+        "   (lib_symbols)",
+        
     ]
