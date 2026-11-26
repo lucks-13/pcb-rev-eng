@@ -3,10 +3,23 @@ import json
 import cv2
 import numpy as np
 from pathlib import Path
-from typing import List, Tuple, Dict, Optional
+from typing import List, Tuple, Dict, Optional, Set
 from .schema import ComponentItem, PinNode
-from ultralytics import YOLO
-from paddleocr import PaddleOCR
+import os
+
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+os.environ.setdefault("YOLO_OFFLINE", "True")
+
+try:
+    from ultralytics import YOLO
+except Exception:
+    YOLO = None
+
+try:
+    from paddleocr import PaddleOCR
+except Exception:
+    PaddleOCR = None
 
 class PCBDetector:
     def __init__(self, parts_db_path : Path, yolo_weights : Optional[Path] = None, use_gpu : bool = False):
