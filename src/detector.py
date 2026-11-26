@@ -217,9 +217,11 @@ class PCBDetector:
                 des = f"{prefix}_AUTO_{auto_idx}"
                 auto_idx += 1
             if des in u_d:
-                des f"{des}_{side_name[0].upper()}{auto_idx}"
+                des = f"{des}_{side_name[0].upper()}{auto_idx}"
                 auto_idx += 1
-                notes
+                review = True
+                notes = f"{notes} | Disambiguated duplicate designator".strip(" |")
+            u_d.add(des)
             comp = ComponentItem(designator = des, part_type = ptype, value = val, footprint = fp, bbox = bbox, confi = conf, needs_review = review, notes = notes)
             components.append(comp)
             pins.extend(self.gen_pins_for_component(comp, side = side_name))
