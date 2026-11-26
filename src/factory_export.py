@@ -26,4 +26,10 @@ def export_factory_package(board_name : str, out_dir : Path, kicad_cli_path : Op
     fab_dir.mkdir(parents = True, exist_ok = True)
     subprocess.run([cli, "pcb", "export", "gerbers", "--output", str(fab_dir) + "/", str(pcb_path)], check = True)
     subprocess.run([cli, "pcb", "export", "drill", "--output", str(fab_dir) + "/", str(pcb_path)], check = True)
-    btm_src = o
+    btm_src = out_dir / "bottom.csv"
+    if btm_src.exists():
+        shutil.copy2(btm_src, fab_dir / "bottom.csv")
+    zip_path = out_dir / f"{board_name}_factory.zip"
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for file_path in sorted(fab_dir.rglob("*")):
+            zf.wr
