@@ -107,7 +107,15 @@ class PCBDetector:
             if any(self.iou(box, prev) > 0.4 for prev in selected):
                 continue
             selected.append(box)
-            if len
+            if len(selected) >= 15:
+                break
+        return [("candidate", box) for box in selected]
+
+    @staticmethod
+    def iou(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -> float:
+        ax1, ay1, ax2, ay2 = a
+        bx1, by1, bx2, by2 = b
+        ix1, iy1 = max(ax1, bx1)
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
