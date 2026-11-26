@@ -104,7 +104,10 @@ class PCBDetector:
         candidates.sort(key = lambda item : item[0], reverse = True)
         selected : List[Tuple[int, int, int, int]] = []
         for _, box in candidates:
-            
+            if any(self.iou(box, prev) > 0.4 for prev in selected):
+                continue
+            selected.append(box)
+            if len
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
