@@ -54,6 +54,7 @@ class PCBDetector:
                         if conf >= 0.45 and txt.strip():
                             found.append(txt.strip())
             texts.append(" | ".join(found))
+        return texts
 
     def infer_part_metadata(self, ocr_text : str, raw_cls : str) -> Tuple[str, str, str, str, float, bool, str]:
         upper = ocr_text.upper()
@@ -79,6 +80,8 @@ class PCBDetector:
             notes = f"OCR : {ocr_text}" if ocr_text else "No OCR text; verify value/footprint"
             return designator, ptype, val,fp, 0.70, needs_review, notes
         return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part; OCR : {ocr_text}" if ocr_text else "Unclassified part; no OCR text")
+
+    
 
     def gen_pins_for_component(self, comp : ComponentItem, side : str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
