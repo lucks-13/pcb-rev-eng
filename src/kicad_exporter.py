@@ -70,4 +70,10 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             py = round(y1 + frac * h, 2)
             left_side = p_idx < (pin_count / 2)
             px_body = x1 if left_side else x2
-            px_end = round(px_body - 4.0, )
+            px_end = round(px_body - 4.0, 2) if left_side else round(px_body + 4.0, 2)
+            lines.extend([
+                "  (wire",
+                "  (pts",
+                f"  (xy {px_body} {py})",
+                f"  "
+            ])
