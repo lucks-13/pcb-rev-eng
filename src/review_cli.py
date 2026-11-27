@@ -26,7 +26,16 @@ def print_review_summary(out_dir : Path) -> None:
 def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, footprint : Optional[str] = None, new_designator : Optional[str] = None, clear_review : bool = False, set_review : bool = False) -> bool:
     draft_path = out_dir / "draft_board.json"
     data = json.loads(draft_path.read_text(encoding = "utf-8"))
-    target = next((c for c in data.get("components")))
+    target = next((c for c in data.get("components", []) if c["designator"] == designator), None)
+    if target is None:
+        print(f"Component '{designator}' not found in {draft_path}")
+        return False
+    if value is not None:
+        target["value"] = value
+    if footprint is not None:
+        target["footprint"] = footprint
+    if clear_review:
+        target[""]
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
