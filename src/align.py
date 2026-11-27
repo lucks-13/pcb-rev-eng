@@ -39,9 +39,14 @@ def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
     if des1 is None or des2 is None or len(kp1) < 12 or len(kp2) < 12:
         return flipped
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck = True)
-    matches = sorted(bf.match(des1, des2), key = lambda m : m.distance)[:200]
+
+    matches = sorted(bf.match(des1, des2), key = lambda m : m.distance)
+    good_matches = [m for m in matches if m.distance <= 65.0][:200]
+    if len(good_matches) < 12:
+        return flipped
     src_pts = np.float32([kp2[m.trainIdx].pt for m in matches]).reshape(-1, 1, 2)
     dst_pts = np.float32([kp1[m.queryIdx].pt for m in matches]).reshape(-1, 1, 2)
-    H, _ = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
-    h, w = top_img.shape[:2]
+    H, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
+    inliers = int(mask.sum()) if mask is not None else 0
+    if inliers < 10 
     return cv2.warpPerspective(flipped, H, (w, h))
