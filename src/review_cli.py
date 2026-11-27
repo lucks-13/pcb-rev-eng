@@ -12,7 +12,8 @@ def print_review_summary(out_dir : Path) -> None:
     data = json.loads(draft_path.read_text(encoding = "utf-8"))
     components = data.get("components", [])
     nets = data.get("nets", [])
-    print(f"\nBoard ")
+    print(f"\nBoard Review : {data.get('board_name', out_dir.name)}")
+    print(f"Components : {len(components)} | ")
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
