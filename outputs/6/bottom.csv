@@ -1,0 +1,7 @@
+Designator,PartType,Value,Footprint,Confidence,NeedsReview,Notes
+X_AUTO_1,candidate,UNK?,UNKNOWN,0.4,True,"Unclassified part, OCR : Cr | 100"
+X_AUTO_2,candidate,UNK?,UNKNOWN,0.4,True,"Unclassified part, OCR : da | LED"
+X_AUTO_3,candidate,UNK?,UNKNOWN,0.4,True,"Unclassified part, no OCR text"
+X_AUTO_4,candidate,UNK?,UNKNOWN,0.4,True,"Unclassified part, no OCR text"
+X_AUTO_5,candidate,UNK?,UNKNOWN,0.4,True,"Unclassified part, no OCR text"
+X_AUTO_6,candidate,UNK?,UNKNOWN,0.4,True,"Unclassified part, no OCR text"
