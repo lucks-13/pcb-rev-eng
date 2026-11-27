@@ -20,12 +20,15 @@ os.environ.setdefault("YOLO_OFFLINE", "True")
 
 def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[int, int]]:
     overlap = cv2.bitwise_and(top_mask, btm_mask)
+    kernel = cv2.getStructuringElement()
+    overlap = cv2.morphologyEx(overlap, cv2.MORPH_OPEN, kernel, iterations = 1)
     num_labels, _, stats, centroids = cv2.connectedComponentsWithStats(overlap)
     vias = []
     for i in range(1, num_labels):
         area = stats[i, cv2.CC_STAT_AREA]
         w = stats[i, cv2.CC_STAT_WIDTH]
         h = stats[i, cv2.CC_STAT_HEIGHT]
+        as
         if 12 <= area <= 400 and 0.6 <= (w / max(1, h)) <= 1.6:
             cx, cy = centroids[i]
             vias.append((int(cx), int(cy)))
