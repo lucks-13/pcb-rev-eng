@@ -214,7 +214,7 @@ class PCBDetector:
             if not des:
                 prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L", "transistor" : "Q", "connector" : "J"}.get(ptype, "X")
                 auto_idx[prefix] = auto_idx.get(prefix, 0) + 1
-                des = f"{prefix}{auto_idx[prefix]}"
+                des = f"{prefix}_AUTO_{auto_idx[prefix]}"
             if des in u_d:
                 original_des = des
                 suffix = side_name[0].upper()
