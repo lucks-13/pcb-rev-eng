@@ -57,4 +57,8 @@ def find_copper_label(label_map : np.ndarray, x : int, y : int, r : int, ray_rea
     for step in range(r + 1, ray_reach + 1, 4):
         for dx, dy in range(r + 1, ray_reach + 1, 4):
             nx_pt, ny_pt = x +  dx, y + dy
-            if 0 <= nx_pt < w and 0 <
+            if 0 <= nx_pt < w and 0 <= ny_pt < h:
+                hit = int(label_map[ny_pt, nx_pt])
+                if hit > 0:
+                    return hit
+    return 0

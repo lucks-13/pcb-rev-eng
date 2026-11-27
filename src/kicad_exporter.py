@@ -36,11 +36,16 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
         "  (lib_symbols",
         "  )"
     ]
-    start_x, start_y = 30.0, 30.0
-    step_x, step_y = 45.0, 35.0
-    cols = 5
+
+    start_x, start_y = 35.0, 35.0
+    step_x = 58.0
+    cols = 4
+    row_y = start_y
+    row_max_h = 0.0
     for idx, comp in enumerate(draft.components):
         col = idx % cols
+        if idx > 0 and col == 0:
+            ro
         row = idx // cols
         cx = round(start_x + col * step_x, 2)
         cy = round(start_y + row * step_y, 2)
@@ -59,6 +64,7 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             f'  (text "{esc(comp.value)}" (at {cx} {round(y2 - 2.5, 2)} 0) (effects (font (size 1.27 1.27))))',
             f'  (text "FP : {esc(comp.footprint)}" (at {cx} {round(y2 - 5.0, 2)} 0) (effects (font (size 1.0 1.0)) (justify left)))',
         ])
+
         if comp.needs_review:
             lines.append(f'  (text "[REVIEW]" (at {cx} {round(y1 - 5.0, 2)} 0) (effects (font (size 1.27 1.27) (bold yes))))')
         comp_pins = [p for p in draft.pins if p.designator == comp.designator]
