@@ -114,7 +114,7 @@ class PCBDetector:
             notes = f"OCR : {ocr_text}" if ocr_text else "Designator inferred, verify value/footprint"
             return designator, ptype, val, fp, 0.75, needs_review, notes
         return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part, OCR : {ocr_text}" if ocr_text else "Unclassified part, no OCR text")
-    
+
     def fallback_boxes(self, img: np.ndarray) -> List[Tuple[str, Tuple[int, int, int, int]]]:
         h, w = img.shape[:2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -125,7 +125,7 @@ class PCBDetector:
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         candidates: List[Tuple[int, Tuple[int, int, int, int]]] = []
         min_area = max(120, int(0.00012 * w * h))
-        max_area = int(0.06 * w * h)
+        max_area = int(0.08 * w * h)
         border = 4
         for cnt in contours:
             x, y, bw, bh = cv2.boundingRect(cnt)
