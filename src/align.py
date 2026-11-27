@@ -18,6 +18,14 @@ def warp_board(img : np.ndarray, corners : np.ndarray, out_size = (1600, 1200)) 
     M = cv2.getPerspectiveTransform(src, dst)
     return cv2.warpPerspective(img, M, (w, h))
 
+def valid_homogrphy(H : np.ndarray, w : int, h : int) -> bool:
+    if H is None or H.shape != (3, 3) or not np.all(np.isfinite(H)):
+        return False
+    det = float(np.linalg.det(H[:2, :2]))
+    if det < 0.25 or det > 4.0:
+        return False
+    
+
 def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
     flipped = cv2.flip(btm_img, 1)
     orb = cv2.ORB_create(3000)
