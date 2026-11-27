@@ -8,7 +8,7 @@ so basically what it does it 2 image [ top and bottom view of the pcb ] is given
 
 this project is currently use a 2 layered boards, refer sample board for references
 
-Also this project is still under development phase so consider this as 
+Also this project is still under development phase so consider this as a version 1
 
 # How to run this project
 
