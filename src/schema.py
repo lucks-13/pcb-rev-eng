@@ -7,10 +7,18 @@ class PinNode:
     designator : str
     pin_num : str
     side : str
-    xy : 
+    xy : Tuple[int, int]
+    confi : float = 1.0
+    source : str = "inferred"
+    needs_review : bool = False
+    notes : str = ""
 
 @dataclass
 class ComponentItem:
+    designator : str
+    part_type : str
+    value : str
+    footprint : str
     
 
 @dataclass
