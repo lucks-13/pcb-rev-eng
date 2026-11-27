@@ -47,8 +47,8 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
                 p["pin_id"] = f"{new_designator}.{p['pin_num']}"
         for net in data.get("nets", []):
             net["pins"] = [f"{new_designator}.{pin_ref.splt('.', 1)[1]}" if pin_ref.startswith(f"{old_des}.") else pin_ref for pin_ref in net.get("pins", [])]
-    draft_path.write_text(json.dumps(data, indent = 2))
-
+    draft_path.write_text(json.dumps(data, indent = 2), encoding = "utf-8")
+    return True
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
