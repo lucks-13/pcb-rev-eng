@@ -13,7 +13,9 @@ def print_review_summary(out_dir : Path) -> None:
     components = data.get("components", [])
     nets = data.get("nets", [])
     print(f"\nBoard Review : {data.get('board_name', out_dir.name)}")
-    print(f"Components : {len(components)} | ")
+    print(f"Components : {len(components)} | Nets : {len(nets)}")
+    for c in components:
+        flag = " [REVIEW]" if c.get("needs_review")
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
