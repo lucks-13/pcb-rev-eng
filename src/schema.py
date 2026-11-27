@@ -19,7 +19,11 @@ class ComponentItem:
     part_type : str
     value : str
     footprint : str
-    
+    bbox : Tuple[int, int, int, int]
+    confi : float
+    notes : str = ""
+    needs_review : bool = False
+    symbol : str = ""
 
 @dataclass
 class NetEntry:

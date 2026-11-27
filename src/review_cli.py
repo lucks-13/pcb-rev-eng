@@ -23,7 +23,7 @@ def print_review_summary(out_dir : Path) -> None:
         for n in flagged_nets:
             print(f" - {n['net_name']:<8} | conf = {n['confi']:.2f} | flags = {','.join(n.get('flags', []))} | pins = {', '.join(n.get('pins', []))}")
 
-def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, footprint : Optional[str] = None, new_designator : Optional[str] = None, clear_review : bool = False, set_review : bool = False) -> bool:
+def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, footprint : Optional[str] = None, new_designator : Optional[str] = None, clear_review : bool = False, set_review : bool = False, pin_num : Optional[str] = None, pin_x : Optional[int] = None, pin_y : Optional[int] = None) -> bool:
     draft_path = out_dir / "draft_board.json"
     data = json.loads(draft_path.read_text(encoding = "utf-8"))
     target = next((c for c in data.get("components", []) if c["designator"] == designator), None)
@@ -47,6 +47,8 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
                 p["pin_id"] = f"{new_designator}.{p['pin_num']}"
         for net in data.get("nets", []):
             net["pins"] = [f"{new_designator}.{pin_ref.split('.', 1)[1]}" if pin_ref.startswith(f"{old_des}.") else pin_ref for pin_ref in net.get("pins", [])]
+    if pin_num is not None:
+        for p in 
     draft_path.write_text(json.dumps(data, indent = 2), encoding = "utf-8")
     return True
 
