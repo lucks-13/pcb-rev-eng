@@ -21,7 +21,10 @@ def main():
     out_dir  = Path("outputs") / args.board
     changed = False
     if args.part:
-        changed = apply_tweak(out_dir = out_dir, designator = args.part, value = )
+        changed = apply_tweak(out_dir = out_dir, designator = args.part, value = args.value, footprint = args.footprint, new_designator = args.rename, clear_review = args.approve, set_review = args.flag_review)
+    if changed or args.reexport:
+        re_export_from_edited_json(out_dir)
+        print(f"Re expo")
     if args.reexport:
         re_export_from_edited_json(out_dir)
         print(f"Re-exported bottom.csv and netlist.csv in {out_dir}")
