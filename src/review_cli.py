@@ -24,7 +24,11 @@ def main():
         changed = apply_tweak(out_dir = out_dir, designator = args.part, value = args.value, footprint = args.footprint, new_designator = args.rename, clear_review = args.approve, set_review = args.flag_review)
     if changed or args.reexport:
         re_export_from_edited_json(out_dir)
-        print(f"Re expo")
+        print(f"Re exported .kicad_sch, bottom.csv and netlist.csv in {out_dir}")
+    if not args.no_overlay and (changed or args.reexport or not args.summary):
+        render_debug_overlay(board_dir, out_dir)
+        print(f"Updated overlays in {out_dir}")
+        
     if args.reexport:
         re_export_from_edited_json(out_dir)
         print(f"Re-exported bottom.csv and netlist.csv in {out_dir}")
