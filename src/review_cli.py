@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Optional
 from src.review_overlay import render_debug_overlay, re_export_from_edited_json
 
+def print_
+
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
     parser.add_argument("--board", required = True)
@@ -27,14 +29,9 @@ def main():
         print(f"Re exported .kicad_sch, bottom.csv and netlist.csv in {out_dir}")
     if not args.no_overlay and (changed or args.reexport or not args.summary):
         render_debug_overlay(board_dir, out_dir)
-        print(f"Updated overlays in {out_dir}")
+        print(f"Updated overlays in {out_dir}")    
+    if args.summary or not (changed or args.reexport):
+        print_review_summary(out_dir)
         
-    if args.reexport:
-        re_export_from_edited_json(out_dir)
-        print(f"Re-exported bottom.csv and netlist.csv in {out_dir}")
-
-    render_debug_overlay(board_dir, out_dir)
-    print(f"Updated overlays in {out_dir}")
-
 if __name__ == "__main__":
     main()
