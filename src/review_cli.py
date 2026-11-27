@@ -21,7 +21,10 @@ def print_review_summary(out_dir : Path) -> None:
     if flagged_nets:
         print("\nFlagged / Low confidence nets : ")
         for n in flagged_nets:
-            print(f" - {n['net_name']:<8} | conf = {n['confi']:.2f} | flags = {','.join(n.get('flags', []))} | pins = {', '.join()}")
+            print(f" - {n['net_name']:<8} | conf = {n['confi']:.2f} | flags = {','.join(n.get('flags', []))} | pins = {', '.join(n.get('pins', []))}")
+
+def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, footprint : Optional[str] = None, ) -> bool:
+
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
