@@ -25,8 +25,11 @@ def valid_homogrphy(H : np.ndarray, w : int, h : int) -> bool:
     if det < 0.25 or det > 4.0:
         return False
     corners = np.array([[0.0, 0.0], [float(w - 1), 0.0], [float(w - 1), float(h - 1)], [0.0, float(h - 1)]], dtype = "float32").reshape(-1, 1, 2)
-    projected = cv2.perspectiveTransform((corners, H).reshape(-1, 2))
+    projected = cv2.perspectiveTransform(corners, H).reshape(-1, 2)
     if not np.all(np.isfinite(projected)):
+        return False
+    max_span = max(w, h) * 2.5
+    if np.any(projected < -max_span) or np.any(projected > max_span):
         return False
     return True
 
@@ -44,9 +47,10 @@ def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
     good_matches = [m for m in matches if m.distance <= 65.0][:200]
     if len(good_matches) < 12:
         return flipped
-    src_pts = np.float32([kp2[m.trainIdx].pt for m in matches]).reshape(-1, 1, 2)
-    dst_pts = np.float32([kp1[m.queryIdx].pt for m in matches]).reshape(-1, 1, 2)
+    src_pts = np.float32([kp2[m.trainIdx].pt for m in good_matches]).reshape(-1, 1, 2)
+    dst_pts = np.float32([kp1[m.queryIdx].pt for m in good_matches]).reshape(-1, 1, 2)
     H, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
     inliers = int(mask.sum()) if mask is not None else 0
-    if inliers < 10 
+    if inliers < 10 or not valid_homogrphy(H, w, h):
+        return flipped
     return cv2.warpPerspective(flipped, H, (w, h))
