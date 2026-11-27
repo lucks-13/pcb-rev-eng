@@ -1,3 +1,2 @@
 Designator,PartType,Value,Footprint,Confidence,NeedsReview,Notes
-R1,ic,LM358,SOIC-8,0.9,False,Matched known part LM358 from OCR : R1 | ● | LM358 U1 | C1 | ●
 U2,ic,AMS1117,SOT-223,0.9,False,Matched known part AMS1117 from OCR : AMS1117 U2
