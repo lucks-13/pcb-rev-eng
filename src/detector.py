@@ -96,13 +96,7 @@ class PCBDetector:
                 ptype = info.get("part_type", "ic")
                 default_prefix = {"resistor": "R", "capacitor": "C", "ic": "U", "diode": "D", "inductor": "L"}.get(ptype, "U")
                 des = designator or f"{default_prefix}_{part_key.upper()}"
-                return (des, ptype,
-                    info.get("default_value", part_key),
-                    info.get("footprint", "SOIC-8"),
-                    0.90,
-                    False,
-                    f"Matched known part {part_key} from OCR : {ocr_text}",
-                )            
+                return (des, ptype, info.get("default_value", part_key), info.get("footprint", "SOIC-8"), 0.90, False, f"Matched known part {part_key} from OCR : {ocr_text}")            
         prefix = designator[0] if designator else ""
         type_map = {
             "R" : ("resistor", "0805", "R_UNK?"),
@@ -118,9 +112,9 @@ class PCBDetector:
             ptype, fp, val = type_map[prefix]
             needs_review = ptype in ("capacitor", "inductor", "ic", "transistor")
             notes = f"OCR : {ocr_text}" if ocr_text else "Designator inferred, verify value/footprint"
-            return designator, ptype, val,fp, 0.75, needs_review, notes
+            return designator, ptype, val, fp, 0.75, needs_review, notes
         return ("", raw_cls or "unknown", "UNK?", "UNKNOWN", 0.40, True, f"Unclassified part, OCR : {ocr_text}" if ocr_text else "Unclassified part, no OCR text")
-
+    
     def fallback_boxes(self, img: np.ndarray) -> List[Tuple[str, Tuple[int, int, int, int]]]:
         h, w = img.shape[:2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
