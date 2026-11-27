@@ -32,17 +32,14 @@ class PCBDetector:
         if PaddleOCR is not None:
             for kw in (
                 {
-                    "lang" : "en",
-                    "enable_mkldnn" : False,
-                    "use_doc_orientation_classify" : False,
-                    "use_doc_unwarping" : False,
-                    "use_textline_orientation" : False,
-
+                    "lang": "en",
+                    "enable_mkldnn": False,
+                    "use_doc_orientation_classify": False,
+                    "use_doc_unwarping": False,
+                    "use_textline_orientation": False,
                 },
-                {
-                    {"use_angle_cls" : True, "lang" : "en"},
-                    {"lang" : "en"},
-                },
+                {"use_angle_cls": True, "lang": "en"},
+                {"lang": "en"},
             ):
                 try:
                     self.ocr = PaddleOCR(**kw)
@@ -97,7 +94,8 @@ class PCBDetector:
         for part_key, info in self.parts_db.get("known_parts", {}).items():
             if re.search(rf"\b{re.escape(part_key.upper())}\b", upper) or part_key.upper() in upper:
                 ptype = info.get("part_type", "ic")
-                default_prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "U")
+                default_prefix = {
+                    "resistor" : "R","capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "U")
                 des = designator or f"{default_prefix}_{part_key.upper()}"
                 return(des, ptype, info.get("default_value", part_key), info.get("footprint", "SOIC-8"), 0.90, False, f"Matched known part {part_key} from OCR : {ocr_text}")            
         prefix = designator[0] if designator else ""
