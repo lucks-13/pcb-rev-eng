@@ -16,8 +16,10 @@ def print_review_summary(out_dir : Path) -> None:
     print(f"Components : {len(components)} | Nets : {len(nets)}")
     for c in components:
         flag = " [REVIEW]" if c.get("needs_review") or c.get("confi", 1.0) < 0.70 else ""
-        print(f"  - {c['designator']:<10} | type = {c['part_type']:<10} | val = {c['value']:<10} | fp = {c['footprint']:<}")
-
+        print(f"  - {c['designator']:<10} | type = {c['part_type']:<10} | val = {c['value']:<10} | fp = {c['footprint']:<8} | conf = {c['confi']:.2f}{flag}")
+    flagged_nets = [n for n in nets if n.get("flags") or n.get("confi", 1.0) < 0.75]
+    if flagged_nets:
+        print("")
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
