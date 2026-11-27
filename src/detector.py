@@ -206,15 +206,20 @@ class PCBDetector:
         components : List[ComponentItem] = []
         pins : List[PinNode] = []
         u_d : Set[str] = set()
-        auto_idx = 1
+        auto_idx = Dict[str, int] = {}
         for side_name, cls_name, bbox in raw_detections:
             src_img = top_img if side_name == "top" else btm_img
             ocr_txt = self.run_ocr_crops(src_img, [bbox])[0]
             des, ptype, val, fp, conf, review, notes = self.infer_part_metadata(ocr_txt, cls_name)
             if not des:
-                prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "X")
-                des = f"{prefix}_AUTO_{auto_idx}"
-                auto_idx += 1
+                prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L", "transistor" : "Q", "connector" : "J"}.get(ptype, "X")
+                auto_idx[prefix] = auto_idx.get(prefix, 0) + 1
+                des = f"{prefix}{auto_idx[prefix]}"
+            while des in u_d:
+                prefix = re.match(r"[A-Z]+", des)
+                prefix = prefix.group(0) if prefix else "X"
+                auto_idx[prefix] = auto_idx.get(prefix, 0) + 1
+                des = 
             if des in u_d:
                 des = f"{des}_{side_name[0].upper()}{auto_idx}"
                 auto_idx += 1
