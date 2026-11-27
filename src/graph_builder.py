@@ -32,7 +32,8 @@ def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinN
             flags.append("MULTI_COPPER_BRIDGE")
             confi = 0.65
         elif len(copper_bridge) == 0:
-            flags.append("DIRECT")
+            flags.append("DIRECT_PIN_TOUCH")
+            confi = 0.
 
         nets.append(NetEntry(net_name=f"NET_{idx:03d}", pins = pin_nodes, confi = 0.80, flags = []))
         idx += 1
