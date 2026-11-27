@@ -25,7 +25,15 @@ def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinN
         pin_nodes = sorted([n for n in comp if not n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))])
         if len(pin_nodes) < 2:
             continue
-        co
+        copper_bridge = [n for n in comp if n.statswith(("TOP_COOPER_", "BOTTOM_COPPER_"))]
+        flags : List[str] = []
+        confi = 0.85
+        if len(copper_bridge) > 2:
+            flags.append("MULTI_COPPER_BRIDGE")
+            confi = 0.65
+        elif len(copper_bridge) == 0:
+            flags.append("DIRECT")
+
         nets.append(NetEntry(net_name=f"NET_{idx:03d}", pins = pin_nodes, confi = 0.80, flags = []))
         idx += 1
     return nets
