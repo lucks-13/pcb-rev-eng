@@ -4,7 +4,7 @@ import numpy as np
 from typing import List
 from .schema import PinNode, NetEntry
 
-def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinNode], snap_radius : int = 16, ray_reach : int = 24) -> List[NetEntry]:
+def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinNode], snap_radius : int = 10, ray_reach : int = 16) -> List[NetEntry]:
     G = nx.Graph()
     _, top_labels = cv2.connectedComponents(top_mask)
     _, btm_labels = cv2.connectedComponents(btm_mask)
