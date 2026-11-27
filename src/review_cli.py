@@ -23,8 +23,10 @@ def print_review_summary(out_dir : Path) -> None:
         for n in flagged_nets:
             print(f" - {n['net_name']:<8} | conf = {n['confi']:.2f} | flags = {','.join(n.get('flags', []))} | pins = {', '.join(n.get('pins', []))}")
 
-def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, footprint : Optional[str] = None, ) -> bool:
-
+def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, footprint : Optional[str] = None, new_designator : Optional[str] = None, clear_review : bool = False, set_review : bool = False) -> bool:
+    draft_path = out_dir / "draft_board.json"
+    data = json.loads(draft_path.read_text(encoding = "utf-8"))
+    target = next((c for c in data.get("components")))
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
