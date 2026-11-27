@@ -41,4 +41,13 @@ To update a footprint:
 ```
 python -m src.review_cli --board sample_board --part R1 --footprint 0805 --reexport
 ```
-To rename a com
+To rename a component:
+```
+python -m src.review_cli --board sample_board --part R1 --rename R2 --reexport
+```
+To approve a reviewed component:
+```
+python -m src.review_cli --board sample_board --part R1 --approve --reexport
+```
+# What i learned
+* Image processing and feature detection using OpenCV
