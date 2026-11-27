@@ -22,21 +22,33 @@ def build_net_lookup(draft : BroardDraft) -> Dict[Tuple[str, str], str]:
                 lookup[(des.strip(), pin.strip())] = net.net_name
     return lookup
 
-def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
-    out_dir.mkdir(parents = True, exist_ok = True)
-    sch_path = out_dir / f"{draft.board_name}.kicad_sch"
-    net_lookup = build_net_lookup(draft)
-    lines: List[str] = [
-        "(kicad_sch",
-        "  (version 20231120)",
-        '  (generator "pcb_rev_eng_draft")',
-        '  (generator_version "1.0")',
-        f"  (uuid {uid()})",
-        '  (paper "A3")',
-        "  (lib_symbols",
-        "  )"
+def build_lib_symbol(comp : ComponentItem, pin_count : int) -> List[str]:
+    symbol_name = comp.symbol or "Device:R"
+    lines = [
+        f'    (symbol "{esc(symbol_name)}"',
+        f'      (pin_names (offset 0.7))',
+        '      (exclude_from_sim no)',
+        '      (in_bom yes)',
+        '      (on_board yes)',
+        '      (property "Reference" "U" (at 0 3.81 0)',
+        '        (effects (font (size 1.27 1.27))))',
+        f'      (property "Value" "{esc(comp.value)}" (at 0 1.27 0)',
+        '        (effects (font (size 1.27 1.27))))',
+        f'      (property "Footprint" "{esc(comp.footprint)}" (at 0 0 0)',
+        '        (effects (font (size 1.27 1.27)) hide))',
+        '      (symbol "body"',
+        '        (rectangle',
+        '          (start -5.08 -5.08)',
+        '          (end 5.08 5.08)',
+        '          (stroke (width 0) (type default))',
+        '          (fill (type background))',
+        f'          (uuid {uid()})',
+        '        )',
+        '      )'
     ]
 
+    spacing = max(2.54, 10.16 / max(1, pin_count))
+    
     start_x, start_y = 35.0, 35.0
     step_x = 58.0
     cols = 4
