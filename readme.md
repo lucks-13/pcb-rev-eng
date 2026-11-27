@@ -4,7 +4,9 @@ Hello everyone! this is one of my experimental project where im trying to solve 
 
 my project idea is simple but the implementing the in project is really a headache 
 
-so basically what it does it 2 image [ top and bottom view of the pcb ] is given as input and it gives a rought .kicad_sch file 
+so basically what it does it 2 image [ top and bottom view of the pcb ] is given as input and it gives a rought .kicad_sch file
+
+this project is currently use a 2 layered boards, refer sample board for references
 
 # How to run this project
 
@@ -53,4 +55,8 @@ python -m src.review_cli --board sample_board --part R1 --approve --reexport
 * learned Image processing and feature detection using OpenCV
 * implemented object detection using yolo
 * connected component analysis for copper region extraction
+* used graph based connectivity reconstruction using NetworkX
 
+# Ai Disclosure
+
+I used AI alot but not for code generation coz this a very complicated project so technically i cannot build them without using ai { here ai means chatgpt, gemini, claude not ai agent like claude code, codex } so i use ai as learning
