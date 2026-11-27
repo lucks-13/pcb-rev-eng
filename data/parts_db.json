@@ -1,1 +1,12 @@
-{"footprints": {"0805": { "pins": ["1", "2"], "type": "passive" },"0603": { "pins": ["1", "2"], "type": "passive" },"SOIC-8": { "pins": ["1", "2", "3", "4", "5", "6", "7", "8"], "type": "ic" },"SOT-23": { "pins": ["1", "2", "3"], "type": "ic" }},"known_parts": {"LM358": {"part_type": "ic","footprint": "SOIC-8","default_value": "LM358","pin_names": {"1": "OUT1", "2": "IN1-", "3": "IN1+", "4": "GND","5": "IN2+", "6": "IN2-", "7": "OUT2", "8": "VCC"}},"AMS1117": {"part_type": "ic","footprint": "SOT-223","default_value": "AMS1117","pin_names": { "1": "ADJ_GND", "2": "VOUT", "3": "VIN", "4": "VOUT_TAB" }}}}
+{"footprints": {"0805": {"pins": ["1", "2"],"type": "passive","symbol": "Device:R"},"0603": {"pins": ["1", "2"],"type": "passive","symbol": "Device:R"},"SOIC-8": {"pins": ["1", "2", "3", "4", "5", "6", "7", "8"],"type": "ic","symbol": "Package_SO:SOIC-8"},"SOT-23": {"pins": ["1", "2", "3"],"type": "ic","symbol": "Package_TO_SOT_SMD:SOT-23"},"SOT-223": {"pins": ["1", "2", "3", "4"],"type": "ic","symbol": "Package_TO_SOT_SMD:SOT-223"}},"known_parts": {"LM358": {"part_type": "ic","footprint": "SOIC-8","symbol": "Amplifier_Operational:LM358","default_value": "LM358","pin_names": {"1": "OUT1","2": "IN1-","3": "IN1+","4": "GND","5": "IN2+","6": "IN2-","7": "OUT2","8": "VCC"}},"AMS1117": {"part_type": "ic","footprint": "SOT-223",
+      "symbol": "Regulator_Linear:AMS1117-3.3",
+      "default_value": "AMS1117",
+      "pin_names": {
+        "1": "ADJ_GND",
+        "2": "VOUT",
+        "3": "VIN",
+        "4": "VOUT_TAB"
+      }
+    }
+  }
+}
