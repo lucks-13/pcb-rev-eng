@@ -165,8 +165,8 @@ class PCBDetector:
 
     def gen_pins_for_component(self, comp: ComponentItem, side: str = "top") -> List[PinNode]:
         x1, y1, x2, y2 = comp.bbox
-        fp_info = self.parts_db.get("footprints", {}).get(comp.footprint)
-        pin_labels = fp_info["pins"] if fp_info else ["1", "2"]
+        fp_info = self.parts_db.get("footprints", {}).get(comp.footprint, {})
+        pin_labels = fp_info.get("pins", ["1", "2"])
         n = len(pin_labels)
         pins: List[PinNode] = []
         mid_y = (y1 + y2) // 2
