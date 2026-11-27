@@ -92,7 +92,7 @@ class PCBDetector:
         des_match = re.search(r"\b([RCDULJQT]\d+)\b", upper)
         designator = des_match.group(1) if des_match else ""
         for part_key, info in self.parts_db.get("known_parts", {}).items():
-            if re.search(rf"\b{re.escape(part_key.upper())}\b", upper) or part_key.upper() in upper:
+            if re.search(rf"(?<![A-Z0-9]){re.escape(part_key.upper())}(?![A-Z0-9])", upper):
                 ptype = info.get("part_type", "ic")
                 default_prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L"}.get(ptype, "U")
                 des = designator or f"{default_prefix}_{part_key.upper()}"
