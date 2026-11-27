@@ -50,4 +50,7 @@ To approve a reviewed component:
 python -m src.review_cli --board sample_board --part R1 --approve --reexport
 ```
 # What i learned
-* Image processing and feature detection using OpenCV
+* learned Image processing and feature detection using OpenCV
+* implemented object detection using yolo
+* connected component analysis for copper region extraction
+
