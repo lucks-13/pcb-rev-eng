@@ -29,3 +29,16 @@ To specify a custom output directory:
 ```
 python run_pipeline.py --board sample_board --out-dir outputs/custom_board
 ```
+To view the component and net summary:
+```
+python -m src.review_cli --board sample_board --summary
+```
+To update a component value:
+```
+python -m src.review_cli --board sample_board --part R1 --value 10k --reexport
+```
+To update a footprint:
+```
+python -m src.review_cli --board sample_board --part R1 --footprint 0805 --reexport
+```
+To rename a com
