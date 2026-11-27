@@ -48,27 +48,16 @@ def build_lib_symbol(comp : ComponentItem, pin_count : int) -> List[str]:
     ]
 
     spacing = max(2.54, 10.16 / max(1, pin_count))
-    
-    start_x, start_y = 35.0, 35.0
-    step_x = 58.0
-    cols = 4
-    row_y = start_y
-    row_max_h = 0.0
-    for idx, comp in enumerate(draft.components):
-        col = idx % cols
-        if idx > 0 and col == 0:
-            row_y += max(42.0, row_max_h + 24.0)
-            row_max_h = 0.0
-        comp_pins = [p for p in draft.pins if p.designator == comp.designator]
-        pin_count = max(2, len(comp_pins))
-        w = 18.0
-        h = max(12.0, round(pin_count * 2.6, 2))
-        row_max_h = max(row_max_h, h)
-        cx = round(start_x + col * step_x, 2)
-        cy = round(row_y + h / 2.0, 2)
-        x1, y1 = round(cx - w / 2.0, 2), round(cy - h / 2.0, 2)
-        x2, y2 = round(cx + w / 2.0, 2), round(cy + h / 2.0, 2)
-        lines.extend([
+    half = max(1, pin_count // 2)
+    for idx in range(pin_count):
+        pin_num = str(idx + 1)
+        if idx < half:
+            y = round((idx - (half - 1) / 2) * spacing, 2)
+            x = -7.62
+            angle = 0
+        else:
+            
+    lines.extend([
             "  (rectangle",
             f"  (start {x1} {y1})",
             f"  (end {x2} {y2})",
