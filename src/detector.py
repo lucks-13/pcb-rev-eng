@@ -119,12 +119,13 @@ class PCBDetector:
         h, w = img.shape[:2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         blur = cv2.GaussianBlur(gray, (3, 3), 0)
-        edges = cv2.Canny(blur, 45, 145)
+        edges = cv2.Canny(blur, 40, 140)
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel, iterations=1)
+        dilated = cv2.dilate(edges, kernel, iterations=1)
+        closed = cv2.morphologyEx(dilated, cv2.MORPH_CLOSE, kernel, iterations=1)
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         candidates: List[Tuple[int, Tuple[int, int, int, int]]] = []
-        min_area = max(120, int(0.00012 * w * h))
+        min_area = max(100, int(0.0001 * w * h))
         max_area = int(0.08 * w * h)
         border = 4
         for cnt in contours:
@@ -136,7 +137,7 @@ class PCBDetector:
             if not (min_area <= area <= max_area):
                 continue
             aspect = bw / max(1, bh)
-            if not (0.20 <= aspect <= 6.0):
+            if not (0.15 <= aspect <= 7.0):
                 continue
             candidates.append((area, (x, y, x2, y2)))
         candidates.sort(key=lambda item: item[0], reverse=True)

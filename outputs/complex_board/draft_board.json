@@ -11,10 +11,10 @@
       "value": "AMS1117",
       "footprint": "SOT-223",
       "bbox": [
-        948,
-        238,
-        1182,
-        422
+        947,
+        237,
+        1183,
+        423
       ],
       "confi": 0.9,
       "notes": "Matched known part AMS1117 from OCR : AMS1117 U2",
@@ -28,7 +28,7 @@
       "pin_num": "1",
       "side": "top",
       "xy": [
-        948,
+        947,
         330
       ],
       "confi": 0.765
@@ -39,7 +39,7 @@
       "pin_num": "2",
       "side": "top",
       "xy": [
-        1182,
+        1183,
         330
       ],
       "confi": 0.765
