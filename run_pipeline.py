@@ -28,8 +28,8 @@ def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[i
         area = stats[i, cv2.CC_STAT_AREA]
         w = stats[i, cv2.CC_STAT_WIDTH]
         h = stats[i, cv2.CC_STAT_HEIGHT]
-        as
-        if 12 <= area <= 400 and 0.6 <= (w / max(1, h)) <= 1.6:
+        aspect = w / max(1, h)
+        if 12 <= area <= 250 and 0.75 <= aspect <= 1.33 and w >= 3 and h >= 3 and w <= :
             cx, cy = centroids[i]
             vias.append((int(cx), int(cy)))
     return vias
