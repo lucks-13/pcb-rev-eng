@@ -39,7 +39,7 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
     elif set_review:
         target["needs_reviw"] = True
     if net in data.get("nets", []):
-        net["pins"] = [f"{new_designator}.{pin}"]
+        net["pins"] = [f"{new_designator}.{pin_ref.splt('.', 1)[1]}" if pin_ref.startswith(f"{old_des}.") else pin_ref for pin_ref in net.get("pins", [])]
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
