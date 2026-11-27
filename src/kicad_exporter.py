@@ -75,4 +75,22 @@ def build_lib_symbol(comp : ComponentItem, pin_count : int) -> List[str]:
 
 def build_symbol_instance(comp : ComponentItem, cx : float, cy : float, pin_count : int) -> List[str]:
     symbol_name = comp.symbol or "Device:R"
-    
+    return [
+        f'  (symbol (lib_id "{esc(symbol_name)}") (at {cx} {cy} 0)',
+        f'    (unit 1)',
+        f'    (exclude_from_sim no)',
+        f'    (in_bom yes)',
+        f'    (on_board yes)',
+        f'    (uuid {uid()})',
+        f'    (property "Reference" "{esc(comp.designator)}" (at {cx} {cy - 7.62} 0)',
+        '      (effects (font (size 1.27 1.27))))',
+        f'    (property "Value" "{esc(comp.value)}" (at {cx} {cy + 7.62} 0)',
+        '      (effects (font (size 1.27 1.27))))',
+        f'    (property "Footprint" "{esc(comp.footprint)}" (at {cx} {cy} 0)',
+        '      (effects (font (size 1.27 1.27)) hide))',
+        '    (pin "1" (uuid ' + uid() + '))',
+        '  )'
+    ]
+
+def expot_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
+    out_dir.mkdir(parents = True)
