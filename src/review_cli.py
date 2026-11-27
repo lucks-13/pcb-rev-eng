@@ -35,7 +35,11 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
     if footprint is not None:
         target["footprint"] = footprint
     if clear_review:
-        target[""]
+        target["needs_review"] = False
+    elif set_review:
+        target["needs_reviw"] = True
+    if net in data.get("nets", []):
+        net["pins"] = [f"{new_designator}.{pin}"]
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
