@@ -15,7 +15,9 @@ def print_review_summary(out_dir : Path) -> None:
     print(f"\nBoard Review : {data.get('board_name', out_dir.name)}")
     print(f"Components : {len(components)} | Nets : {len(nets)}")
     for c in components:
-        flag = " [REVIEW]" if c.get("needs_review") or c.get("confi", 1.0) < 0.70 
+        flag = " [REVIEW]" if c.get("needs_review") or c.get("confi", 1.0) < 0.70 else ""
+        print(f"  - {c['designator']:<10} | type = {c['part_type']:<10} | val = {c['value']:<10} | fp = {c['footprint']:<}")
+
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
