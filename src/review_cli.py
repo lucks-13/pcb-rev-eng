@@ -34,12 +34,10 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
         target["value"] = value
     if footprint is not None:
         target["footprint"] = footprint
-
-    
     if clear_review:
         target["needs_review"] = False
     elif set_review:
-        target["needs_reviw"] = True
+        target["needs_review"] = True
     if new_designator and new_designator != designator:
         old_des = target["designator"]
         target["designator"] = new_designator
@@ -48,8 +46,7 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
                 p["designator"] = new_designator
                 p["pin_id"] = f"{new_designator}.{p['pin_num']}"
         for net in data.get("nets", []):
-            net["pins"] = [f"{new_designator}.{pin_ref.splt('.', 1)[1]}" if pin_ref.startswith(f"{old_des}.") else pin_ref for pin_ref in net.get("pins", [])]
-    
+            net["pins"] = [f"{new_designator}.{pin_ref.split('.', 1)[1]}" if pin_ref.startswith(f"{old_des}.") else pin_ref for pin_ref in net.get("pins", [])]
     draft_path.write_text(json.dumps(data, indent = 2), encoding = "utf-8")
     return True
 
