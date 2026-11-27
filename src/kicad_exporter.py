@@ -93,4 +93,19 @@ def build_symbol_instance(comp : ComponentItem, cx : float, cy : float, pin_coun
     ]
 
 def expot_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
-    out_dir.mkdir(parents = True)
+    out_dir.mkdir(parents = True, exist_ok = True)
+    sch_path = out_dir / f"{draft.board_name}.kicad_sch"
+    net_lookup = build_net_lookup()
+    lines : List[str] = [
+        "(kicad_sch",
+        "  (version 20231120)",
+        '  (generator "pcb_rev_eng_draft")',
+        '  (generator_version "1.0")',
+        f"  (uuid {uid()})",
+        '  (paper "A3")',
+        "  (lib_symbols"
+    ]
+    for comp in draft.components:
+        lines.extend(build_lib_symbol(comp, pin_count_for_comp(comp, draft)))
+    lines.append("  )")
+    start_
