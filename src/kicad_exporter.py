@@ -144,8 +144,6 @@ def expot_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
                     "    )",
                     "  )"
                 ])
-
     lines.append(")")
-
     sch_path.write_text("\n".join(lines) + "\n", encoding = "utf-8")
     return sch_path
