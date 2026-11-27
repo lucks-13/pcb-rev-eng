@@ -24,7 +24,8 @@ def valid_homogrphy(H : np.ndarray, w : int, h : int) -> bool:
     det = float(np.linalg.det(H[:2, :2]))
     if det < 0.25 or det > 4.0:
         return False
-    
+    corners = np.array([[0.0, 0.0], [float(w - 1), 0.0], [float(w - 1), float(h - 1)], [0.0, float(h - 1)]], dtype = "float32").reshape(-1, 1, 2)
+    projected = cv2.perspectiveTransform((corners, H).res)
 
 def align_btm_to_top(top_img : np.ndarray, btm_img : np.ndarray) -> np.ndarray:
     flipped = cv2.flip(btm_img, 1)
