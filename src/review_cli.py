@@ -48,7 +48,14 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
         for net in data.get("nets", []):
             net["pins"] = [f"{new_designator}.{pin_ref.split('.', 1)[1]}" if pin_ref.startswith(f"{old_des}.") else pin_ref for pin_ref in net.get("pins", [])]
     if pin_num is not None:
-        for p in 
+        for p in data.get("pins", []):
+            if p["designator"] == designator and p["pin_num"] == pin_num:
+                if pin_x is not None:
+                    p["xy"][0] = pin_x
+                if pin_y is not None:
+                    p["xy"][1] = pin_y
+                p["source"] = "manual"
+                p["needs"]
     draft_path.write_text(json.dumps(data, indent = 2), encoding = "utf-8")
     return True
 
