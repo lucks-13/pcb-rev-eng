@@ -45,13 +45,18 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
     for idx, comp in enumerate(draft.components):
         col = idx % cols
         if idx > 0 and col == 0:
-            ro
+            row_y += max(42.0, row_max_h + 24.0)
+            row_max_h = 0.0
+        comp_pins = [p for p in draft.pins if p.designator == comp.designator]
+        pin_count = max(2, len(comp_pins))
+        w = 18.0
+
         row = idx // cols
-        cx = round(start_x + col * step_x, 2)
-        cy = round(start_y + row * step_y, 2)
         w, h = 16.0, 12.0
-        x1, y1 = round(cx - w / 2, 2), round(cy - h / 2, 2)
-        x2, y2 = round(cx + w / 2, 2), round(cy + h / 2, 2)
+        cx = round(start_x + col * step_x, 2)
+        cy = round(row, 2)
+        x1, y1 = round(cx - w / 2.0, 2), round(cy - h / 2.0, 2)
+        x2, y2 = round(cx + w / 2.0, 2), round(cy + h / 2.0, 2)
         lines.extend([
             "  (rectangle",
             f"  (start {x1} {y1})",
