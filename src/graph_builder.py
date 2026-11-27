@@ -49,4 +49,4 @@ def sample_region(label_map : np.ndarray, x : int, y : int, r : int) -> int:
     vals, counts = np.unique(nonzero, return_counts = True)
     return int(vals[np.argmax(counts)])
 
-def find_copper_label(label_map : np.ndarray, x : int, y : int, r : int, ra)
+def find_copper_label(label_map : np.ndarray, x : int, y : int, r : int, ray_reach : in)
