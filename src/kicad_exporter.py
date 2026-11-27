@@ -108,4 +108,12 @@ def expot_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
     for comp in draft.components:
         lines.extend(build_lib_symbol(comp, pin_count_for_comp(comp, draft)))
     lines.append("  )")
-    start_
+    start_x, start_y = 35.0, 35.0
+    step_x = 58.0
+    cols = 4
+    row_y = start_y
+    row_max_h = 0.0
+    for idx, comp in enumerate(draft.components):
+        col = idx % cols
+        if idx > 0 and col == 0:
+            row_y += max(42.0, )
