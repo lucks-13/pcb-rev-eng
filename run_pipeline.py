@@ -20,7 +20,7 @@ os.environ.setdefault("YOLO_OFFLINE", "True")
 
 def find_cand_vias(top_mask : np.ndarray, btm_mask : np.ndarray) -> list[tuple[int, int]]:
     overlap = cv2.bitwise_and(top_mask, btm_mask)
-    kernel = cv2.getStructuringElement()
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
     overlap = cv2.morphologyEx(overlap, cv2.MORPH_OPEN, kernel, iterations = 1)
     num_labels, _, stats, centroids = cv2.connectedComponentsWithStats(overlap)
     vias = []

@@ -92,10 +92,10 @@ def build_symbol_instance(comp : ComponentItem, cx : float, cy : float, pin_coun
         '  )'
     ]
 
-def expot_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
+def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
     out_dir.mkdir(parents = True, exist_ok = True)
     sch_path = out_dir / f"{draft.board_name}.kicad_sch"
-    net_lookup = build_net_lookup()
+    net_lookup = build_net_lookup(draft)
     lines : List[str] = [
         "(kicad_sch",
         "  (version 20231120)",
