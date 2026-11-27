@@ -133,3 +133,19 @@ def expot_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             py = round(cy - h / 2.0 + frac * h, 2)
             left_side = p_idx < (len(comp_pins) / 2)
             px = round(cx - w / 2.0 - 4.0, 2)
+            net_name = net_lookup.get((comp.designator, p.pin_num), "")
+            if net_name:
+                lines.extend([
+                    "  (label",
+                    f'    "{esc(net_name)}"',
+                    f"    (at {px} {py} 0)",
+                    "    (effects",
+                    "      (font (size 1.27 1.27))",
+                    "    )",
+                    "  )"
+                ])
+
+    lines.append(")")
+
+    sch_path.write_text("\n".join(lines) + "\n", encoding = "utf-8")
+    return sch_path
