@@ -26,14 +26,16 @@ def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinN
         if len(pin_nodes) < 2:
             continue
         copper_bridge = [n for n in comp if n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))]
+        pin_confi = [G.nodes[n]["meta"].confi for n in pin_nodes if n in G.nodes and "meta" in G.nodes[n]]
+        confi = min(pin_confi) if pin_confi else 0.50
         flags : List[str] = []
-        confi = 0.85
         if len(copper_bridge) > 2:
             flags.append("MULTI_COPPER_BRIDGE")
-            confi = 0.65
+            confi *= 0.75
         elif len(copper_bridge) == 0:
             flags.append("DIRECT_PIN_TOUCH")
-            confi = 0.70
+            confi *= 0.80
+        
         nets.append(NetEntry(net_name = f"NET_{idx:03d}", pins = pin_nodes, confi = confi, flags = flags))
         idx += 1
     return nets
