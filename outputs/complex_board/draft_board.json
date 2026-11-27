@@ -6,7 +6,7 @@
   ],
   "components": [
     {
-      "designator": "U1",
+      "designator": "R1",
       "part_type": "ic",
       "value": "LM358",
       "footprint": "SOIC-8",
@@ -14,10 +14,25 @@
         248,
         218,
         851,
-        583
+        582
       ],
-      "confi": 0.85,
-      "notes": "Matched known part LM358 from OCR : R1 | \u25cf | _ | LM358 U1 | C1 | \u25cf",
+      "confi": 0.9,
+      "notes": "Matched known part LM358 from OCR : R1 | \u25cf | LM358 U1 | C1 | \u25cf",
+      "needs_review": false
+    },
+    {
+      "designator": "U2",
+      "part_type": "ic",
+      "value": "AMS1117",
+      "footprint": "SOT-223",
+      "bbox": [
+        948,
+        238,
+        1182,
+        422
+      ],
+      "confi": 0.9,
+      "notes": "Matched known part AMS1117 from OCR : AMS1117 U2",
       "needs_review": false
     },
     {
@@ -26,104 +41,141 @@
       "value": "UNK?",
       "footprint": "UNKNOWN",
       "bbox": [
-        761,
-        144,
-        928,
-        385
+        755,
+        301,
+        851,
+        403
       ],
       "confi": 0.4,
-      "notes": "Unclassified part; no OCR text",
+      "notes": "Unclassified part, no OCR text",
+      "needs_review": true
+    },
+    {
+      "designator": "X_AUTO_2",
+      "part_type": "candidate",
+      "value": "UNK?",
+      "footprint": "UNKNOWN",
+      "bbox": [
+        847,
+        208,
+        934,
+        302
+      ],
+      "confi": 0.4,
+      "notes": "Unclassified part, no OCR text",
       "needs_review": true
     }
   ],
   "pins": [
     {
-      "pin_id": "U1.1",
-      "designator": "U1",
+      "pin_id": "R1.1",
+      "designator": "R1",
       "pin_num": "1",
       "side": "top",
       "xy": [
         248,
         263
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
     },
     {
-      "pin_id": "U1.2",
-      "designator": "U1",
+      "pin_id": "R1.2",
+      "designator": "R1",
       "pin_num": "2",
       "side": "top",
       "xy": [
         248,
         354
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
     },
     {
-      "pin_id": "U1.3",
-      "designator": "U1",
+      "pin_id": "R1.3",
+      "designator": "R1",
       "pin_num": "3",
       "side": "top",
       "xy": [
         248,
-        446
+        445
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
     },
     {
-      "pin_id": "U1.4",
-      "designator": "U1",
+      "pin_id": "R1.4",
+      "designator": "R1",
       "pin_num": "4",
       "side": "top",
       "xy": [
         248,
-        537
+        536
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
     },
     {
-      "pin_id": "U1.5",
-      "designator": "U1",
+      "pin_id": "R1.5",
+      "designator": "R1",
       "pin_num": "5",
       "side": "top",
       "xy": [
         851,
         263
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
     },
     {
-      "pin_id": "U1.6",
-      "designator": "U1",
+      "pin_id": "R1.6",
+      "designator": "R1",
       "pin_num": "6",
       "side": "top",
       "xy": [
         851,
         354
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
     },
     {
-      "pin_id": "U1.7",
-      "designator": "U1",
+      "pin_id": "R1.7",
+      "designator": "R1",
       "pin_num": "7",
       "side": "top",
       "xy": [
         851,
-        446
+        445
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
     },
     {
-      "pin_id": "U1.8",
-      "designator": "U1",
+      "pin_id": "R1.8",
+      "designator": "R1",
       "pin_num": "8",
       "side": "top",
       "xy": [
         851,
-        537
+        536
       ],
-      "confi": 0.7224999999999999
+      "confi": 0.765
+    },
+    {
+      "pin_id": "U2.1",
+      "designator": "U2",
+      "pin_num": "1",
+      "side": "top",
+      "xy": [
+        948,
+        330
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "U2.2",
+      "designator": "U2",
+      "pin_num": "2",
+      "side": "top",
+      "xy": [
+        1182,
+        330
+      ],
+      "confi": 0.765
     },
     {
       "pin_id": "X_AUTO_1.1",
@@ -131,8 +183,8 @@
       "pin_num": "1",
       "side": "bottom",
       "xy": [
-        761,
-        264
+        755,
+        352
       ],
       "confi": 0.34
     },
@@ -142,8 +194,30 @@
       "pin_num": "2",
       "side": "bottom",
       "xy": [
-        928,
-        264
+        851,
+        352
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_2.1",
+      "designator": "X_AUTO_2",
+      "pin_num": "1",
+      "side": "bottom",
+      "xy": [
+        847,
+        255
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_2.2",
+      "designator": "X_AUTO_2",
+      "pin_num": "2",
+      "side": "bottom",
+      "xy": [
+        934,
+        255
       ],
       "confi": 0.34
     }
@@ -152,14 +226,41 @@
     {
       "net_name": "NET_001",
       "pins": [
-        "U1.1",
-        "U1.2",
-        "U1.3",
-        "U1.6",
-        "U1.7",
-        "U1.8"
+        "R1.1",
+        "R1.2",
+        "R1.3",
+        "R1.6",
+        "R1.7",
+        "R1.8"
       ],
-      "confi": 0.8,
+      "confi": 0.85,
+      "flags": []
+    },
+    {
+      "net_name": "NET_002",
+      "pins": [
+        "U2.1",
+        "U2.2"
+      ],
+      "confi": 0.85,
+      "flags": []
+    },
+    {
+      "net_name": "NET_003",
+      "pins": [
+        "X_AUTO_1.1",
+        "X_AUTO_1.2"
+      ],
+      "confi": 0.85,
+      "flags": []
+    },
+    {
+      "net_name": "NET_004",
+      "pins": [
+        "X_AUTO_2.1",
+        "X_AUTO_2.2"
+      ],
+      "confi": 0.85,
       "flags": []
     }
   ]
