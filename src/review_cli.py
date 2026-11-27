@@ -14,12 +14,14 @@ def main():
     parser.add_argument("--rename", default = None, help = "New designator (updates pins and nets)")
     parser.add_argument("--approve", action = "store_true", help = "Mark component as reviewed (needs_review = false)")
     parser.add_argument("--flag-review", action = "store_true", help = "Mark component as reviewed (needs_review = true)")
-    parser.add_argument("--reexport", action = "store_true", help = "Re export .kicad_sch, ")
+    parser.add_argument("--reexport", action = "store_true", help = "Re export .kicad_sch, bottom.csv and netlist.csv")
     parser.add_argument("--no-overlay", action = "store_true", help = "Skip re rendering overlay PNG")
     args = parser.parse_args()
     board_dir = Path("data/boards") / args.board
     out_dir  = Path("outputs") / args.board
-
+    changed = False
+    if args.part:
+        changed = apply_tweak(out_dir = out_dir, designator = args.part, value = )
     if args.reexport:
         re_export_from_edited_json(out_dir)
         print(f"Re-exported bottom.csv and netlist.csv in {out_dir}")
