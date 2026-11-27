@@ -4,7 +4,7 @@ import numpy as np
 from typing import List
 from .schema import PinNode, NetEntry
 
-def build_netlist(top_mask, btm_mask, pins : List[PinNode], snap_radius : int = 18) -> List[NetEntry]:
+def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinNode], snap_radius : int = 16, ray_reach : int = 24) -> List[NetEntry]:
     G = nx.Graph()
     _, top_labels = cv2.connectedComponents(top_mask)
     _, btm_labels = cv2.connectedComponents(btm_mask)
@@ -12,11 +12,11 @@ def build_netlist(top_mask, btm_mask, pins : List[PinNode], snap_radius : int = 
         G.add_node(p.pin_id, meta = p)
         x, y = p.xy
         if p.side in ("top", "through"):
-            lbl = sample_region(top_labels, x, y, snap_radius)
+            lbl = sample_region(top_labels, x, y, snap_radius, ray_reach)
             if lbl > 0:
                 G.add_edge(p.pin_id, f"TOP_COPPER_{lbl}")
         if p.side in ("bottom", "through"):
-            lbl = sample_region(btm_labels, x, y, snap_radius)
+            lbl = sample_region(btm_labels, x, y, snap_radius, ray_reach)
             if lbl > 0:
                 G.add_edge(p.pin_id, f"BOTTOM_COPPER_{lbl}")
     nets : List[NetEntry] = []
@@ -25,6 +25,7 @@ def build_netlist(top_mask, btm_mask, pins : List[PinNode], snap_radius : int = 
         pin_nodes = sorted([n for n in comp if not n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))])
         if len(pin_nodes) < 2:
             continue
+        co
         nets.append(NetEntry(net_name=f"NET_{idx:03d}", pins = pin_nodes, confi = 0.80, flags = []))
         idx += 1
     return nets
