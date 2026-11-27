@@ -15,5 +15,17 @@ cd pcb-rev-eng
 ```
 Install the dependencies:
 ```
-
+pip install -r requirements.txt
+```
+To run the pipeline:
+```
+python run_pipeline.py --board sample_board
+```
+You can also provide custom YOLO weights.
+```
+python run_pipeline.py --board sample_board --weights file.pt
+```
+To specify a custom output directory:
+```
+python run_pipeline.py --board sample_board --out-dir outputs/custom_board
 ```
