@@ -55,7 +55,7 @@ def apply_tweak(out_dir : Path, designator : str, value : Optional[str] = None, 
                 if pin_y is not None:
                     p["xy"][1] = pin_y
                 p["source"] = "manual"
-                p["needs"]
+                p["needs_review"] = False
     draft_path.write_text(json.dumps(data, indent = 2), encoding = "utf-8")
     return True
 
@@ -67,6 +67,9 @@ def main():
     parser.add_argument("--value", default = None, help = "New component value")
     parser.add_argument("--footprint", default = None, help = "New component footprint")
     parser.add_argument("--rename", default = None, help = "New designator (updates pins and nets)")
+    
+    parser.add_argument("--pin", default = None, help = "Pin number to move")
+
     parser.add_argument("--approve", action = "store_true", help = "Mark component as reviewed (needs_review = false)")
     parser.add_argument("--flag-review", action = "store_true", help = "Mark component as reviewed (needs_review = true)")
     parser.add_argument("--reexport", action = "store_true", help = "Re export .kicad_sch, bottom.csv and netlist.csv")
