@@ -50,11 +50,10 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
         comp_pins = [p for p in draft.pins if p.designator == comp.designator]
         pin_count = max(2, len(comp_pins))
         w = 18.0
-
-        row = idx // cols
-        w, h = 16.0, 12.0
+        h = max(12.0, round(pin_count * 2.6, 2))
+        row_max_h = max(row_max_h, h)
         cx = round(start_x + col * step_x, 2)
-        cy = round(row, 2)
+        cy = round(row_y + h / 2.0, 2)
         x1, y1 = round(cx - w / 2.0, 2), round(cy - h / 2.0, 2)
         x2, y2 = round(cx + w / 2.0, 2), round(cy + h / 2.0, 2)
         lines.extend([
@@ -65,13 +64,12 @@ def export_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
             "  (fill (type none))",
             f"  (uuid {uid()})",
             "  )",
-            f'  (text "{esc(comp.designator)}" (at {cx} {round(y1 - 2.5, 2)} 0) (effects (font (size 1.5 1.5))))',
-            f'  (text "{esc(comp.value)}" (at {cx} {round(y2 - 2.5, 2)} 0) (effects (font (size 1.27 1.27))))',
-            f'  (text "FP : {esc(comp.footprint)}" (at {cx} {round(y2 - 5.0, 2)} 0) (effects (font (size 1.0 1.0)) (justify left)))',
+            f'  (text "{esc(comp.designator)}" (at {cx} {round(y1 - 2.5, 2)} 0) (effects (font (size 1.5 1.5) (bold yes))))',
+            f'  (text "{esc(comp.value)}" (at {cx} {round(y2 + 2.5, 2)} 0) (effects (font (size 1.27 1.27))))',
+            f'  (text "FP: {esc(comp.footprint)}" (at {x1} {round(y2 + 5.2, 2)} 0) (effects (font (size 1.0 1.0)) (justify left)))',
         ])
-
         if comp.needs_review:
-            lines.append(f'  (text "[REVIEW]" (at {cx} {round(y1 - 5.0, 2)} 0) (effects (font (size 1.27 1.27) (bold yes))))')
+            lines.append(f'  (text "[REVIEW]" (at {cx} {round(y1 - 5.2, 2)} 0) (effects (font (size 1.27 1.27) (bold yes))))')
         comp_pins = [p for p in draft.pins if p.designator == comp.designator]
         if not comp_pins:
             comp_pins = []
