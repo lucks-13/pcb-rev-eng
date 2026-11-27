@@ -4,7 +4,15 @@ from pathlib import Path
 from typing import Optional
 from src.review_overlay import render_debug_overlay, re_export_from_edited_json
 
-def print_
+def print_review_summary(out_dir : Path) -> None:
+    draft_path = out_dir / "draft_board.json"
+    if not draft_path.exists():
+        print(f"No draft_board.json found in {out_dir}")
+        return
+    data = json.loads(draft_path.read_text(encoding = "utf-8"))
+    components = data.get("components", [])
+    nets = data.get("nets", [])
+    print(f"\nBoard ")
 
 def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
