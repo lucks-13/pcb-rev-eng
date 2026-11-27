@@ -116,4 +116,12 @@ def expot_kicad_sch(draft : BroardDraft, out_dir : Path) -> Path:
     for idx, comp in enumerate(draft.components):
         col = idx % cols
         if idx > 0 and col == 0:
-            row_y += max(42.0, )
+            row_y += max(42.0, row_max_h + 24.0)
+            row_max_h = 0.0
+        pin_count = pin_count_for_comp(comp, draft)
+        w = 18.0
+        h = max(12.0, round(pin_count * 2.6, 2))
+        row_max_h = max(row_max_h, h)
+        cx = round(start_x + col * step_x, 2)
+        cy = round(row_y + h / 2.0, 2)
+        lines.extend(build_symbol_instance(comp, ))
