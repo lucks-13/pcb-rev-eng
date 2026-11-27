@@ -7,19 +7,11 @@ class PinNode:
     designator : str
     pin_num : str
     side : str
-    xy : Tuple[int, int]
-    confi : float = 1.0
+    xy : 
 
 @dataclass
 class ComponentItem:
-    designator : str
-    part_type : str
-    value : str
-    footprint : str
-    bbox : Tuple[int, int, int, int]
-    confi : float
-    notes : str = ""
-    needs_review : bool = False
+    
 
 @dataclass
 class NetEntry:
