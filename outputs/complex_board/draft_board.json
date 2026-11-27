@@ -1,0 +1,175 @@
+{
+  "board_name": "complex_board",
+  "img_size": [
+    1600,
+    1200
+  ],
+  "components": [
+    {
+      "designator": "R1",
+      "part_type": "ic",
+      "value": "LM358",
+      "footprint": "SOIC-8",
+      "bbox": [
+        248,
+        218,
+        851,
+        582
+      ],
+      "confi": 0.9,
+      "notes": "Matched known part LM358 from OCR : R1 | \u25cf | LM358 U1 | C1 | \u25cf",
+      "needs_review": false
+    },
+    {
+      "designator": "U2",
+      "part_type": "ic",
+      "value": "AMS1117",
+      "footprint": "SOT-223",
+      "bbox": [
+        948,
+        238,
+        1182,
+        422
+      ],
+      "confi": 0.9,
+      "notes": "Matched known part AMS1117 from OCR : AMS1117 U2",
+      "needs_review": false
+    }
+  ],
+  "pins": [
+    {
+      "pin_id": "R1.1",
+      "designator": "R1",
+      "pin_num": "1",
+      "side": "top",
+      "xy": [
+        248,
+        263
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "R1.2",
+      "designator": "R1",
+      "pin_num": "2",
+      "side": "top",
+      "xy": [
+        248,
+        354
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "R1.3",
+      "designator": "R1",
+      "pin_num": "3",
+      "side": "top",
+      "xy": [
+        248,
+        445
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "R1.4",
+      "designator": "R1",
+      "pin_num": "4",
+      "side": "top",
+      "xy": [
+        248,
+        536
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "R1.5",
+      "designator": "R1",
+      "pin_num": "5",
+      "side": "top",
+      "xy": [
+        851,
+        263
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "R1.6",
+      "designator": "R1",
+      "pin_num": "6",
+      "side": "top",
+      "xy": [
+        851,
+        354
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "R1.7",
+      "designator": "R1",
+      "pin_num": "7",
+      "side": "top",
+      "xy": [
+        851,
+        445
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "R1.8",
+      "designator": "R1",
+      "pin_num": "8",
+      "side": "top",
+      "xy": [
+        851,
+        536
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "U2.1",
+      "designator": "U2",
+      "pin_num": "1",
+      "side": "top",
+      "xy": [
+        948,
+        330
+      ],
+      "confi": 0.765
+    },
+    {
+      "pin_id": "U2.2",
+      "designator": "U2",
+      "pin_num": "2",
+      "side": "top",
+      "xy": [
+        1182,
+        330
+      ],
+      "confi": 0.765
+    }
+  ],
+  "nets": [
+    {
+      "net_name": "NET_001",
+      "pins": [
+        "R1.1",
+        "R1.2",
+        "R1.3",
+        "R1.6",
+        "R1.7",
+        "R1.8"
+      ],
+      "confi": 0.85,
+      "flags": []
+    },
+    {
+      "net_name": "NET_002",
+      "pins": [
+        "U2.1",
+        "U2.2"
+      ],
+      "confi": 0.85,
+      "flags": []
+    }
+  ]
+}
