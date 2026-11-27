@@ -8,7 +8,9 @@ def main():
     parser = argparse.ArgumentParser(description = "Review draft, tweak low confidence parts and re-export")
     parser.add_argument("--board", required = True)
     parser.add_argument("--summary", action = "store_true", help = "Print component and flagged net summary")
-    parser.add_argument("--part", default = "", )
+    parser.add_argument("--part", default = "", help = "Designator to tweak (eg. X_AUTO_1 or R1)")
+    parser.add_argument("--value", default = "None", help = "New component value")
+    
     parser.add_argument("--reexport", action = "store_true")
     args = parser.parse_args()
     board_dir = Path("data/boards") / args.board
