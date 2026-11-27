@@ -12,7 +12,8 @@ def main():
     parser.add_argument("--value", default = None, help = "New component value")
     parser.add_argument("--footprint", default = None, help = "New component footprint")
     parser.add_argument("--rename", default = None, help = "New designator (updates pins and nets)")
-    
+    parser.add_argument("--approve", action = "store_true", help = "Mark component as reviewed (needs_review = false)")
+    parser.add_argument("--flag-review", action = "st")
 
 
     parser.add_argument("--reexport", action = "store_true")
