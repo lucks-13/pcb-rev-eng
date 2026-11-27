@@ -12,11 +12,11 @@ def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinN
         G.add_node(p.pin_id, meta = p)
         x, y = p.xy
         if p.side in ("top", "through"):
-            lbl = sample_region(top_labels, x, y, snap_radius, ray_reach)
+            lbl = find_copper_label(top_labels, x, y, snap_radius, ray_reach)
             if lbl > 0:
                 G.add_edge(p.pin_id, f"TOP_COPPER_{lbl}")
         if p.side in ("bottom", "through"):
-            lbl = sample_region(btm_labels, x, y, snap_radius, ray_reach)
+            lbl = find_copper_label(btm_labels, x, y, snap_radius, ray_reach)
             if lbl > 0:
                 G.add_edge(p.pin_id, f"BOTTOM_COPPER_{lbl}")
     nets : List[NetEntry] = []
@@ -25,7 +25,7 @@ def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinN
         pin_nodes = sorted([n for n in comp if not n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))])
         if len(pin_nodes) < 2:
             continue
-        copper_bridge = [n for n in comp if n.statswith(("TOP_COOPER_", "BOTTOM_COPPER_"))]
+        copper_bridge = [n for n in comp if n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))]
         flags : List[str] = []
         confi = 0.85
         if len(copper_bridge) > 2:
@@ -55,8 +55,8 @@ def find_copper_label(label_map : np.ndarray, x : int, y : int, r : int, ray_rea
         return lbl
     h, w = label_map.shape
     for step in range(r + 1, ray_reach + 1, 4):
-        for dx, dy in range(r + 1, ray_reach + 1, 4):
-            nx_pt, ny_pt = x +  dx, y + dy
+        for dx, dy in [(-step, 0), (step, 0), (0, -step), (0, step)]:
+            nx_pt, ny_pt = x + dx, y + dy
             if 0 <= nx_pt < w and 0 <= ny_pt < h:
                 hit = int(label_map[ny_pt, nx_pt])
                 if hit > 0:
