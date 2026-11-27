@@ -1,0 +1,295 @@
+{
+  "board_name": "3",
+  "img_size": [
+    1600,
+    1200
+  ],
+  "components": [
+    {
+      "designator": "X_AUTO_1",
+      "part_type": "candidate",
+      "value": "UNK?",
+      "footprint": "UNKNOWN",
+      "bbox": [
+        660,
+        917,
+        681,
+        938
+      ],
+      "confi": 0.4,
+      "notes": "Unclassified part, no OCR text",
+      "needs_review": true
+    },
+    {
+      "designator": "X_AUTO_2",
+      "part_type": "candidate",
+      "value": "UNK?",
+      "footprint": "UNKNOWN",
+      "bbox": [
+        400,
+        324,
+        421,
+        345
+      ],
+      "confi": 0.4,
+      "notes": "Unclassified part, no OCR text",
+      "needs_review": true
+    },
+    {
+      "designator": "X_AUTO_3",
+      "part_type": "candidate",
+      "value": "UNK?",
+      "footprint": "UNKNOWN",
+      "bbox": [
+        622,
+        321,
+        643,
+        342
+      ],
+      "confi": 0.4,
+      "notes": "Unclassified part, no OCR text",
+      "needs_review": true
+    }
+  ],
+  "pins": [
+    {
+      "pin_id": "X_AUTO_1.1",
+      "designator": "X_AUTO_1",
+      "pin_num": "1",
+      "side": "bottom",
+      "xy": [
+        660,
+        927
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_1.2",
+      "designator": "X_AUTO_1",
+      "pin_num": "2",
+      "side": "bottom",
+      "xy": [
+        681,
+        927
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_2.1",
+      "designator": "X_AUTO_2",
+      "pin_num": "1",
+      "side": "bottom",
+      "xy": [
+        400,
+        334
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_2.2",
+      "designator": "X_AUTO_2",
+      "pin_num": "2",
+      "side": "bottom",
+      "xy": [
+        421,
+        334
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_3.1",
+      "designator": "X_AUTO_3",
+      "pin_num": "1",
+      "side": "bottom",
+      "xy": [
+        622,
+        331
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "X_AUTO_3.2",
+      "designator": "X_AUTO_3",
+      "pin_num": "2",
+      "side": "bottom",
+      "xy": [
+        643,
+        331
+      ],
+      "confi": 0.34
+    },
+    {
+      "pin_id": "VIA_001.1",
+      "designator": "VIA_001",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        632,
+        331
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_002.1",
+      "designator": "VIA_002",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        410,
+        334
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_003.1",
+      "designator": "VIA_003",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        1130,
+        508
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_004.1",
+      "designator": "VIA_004",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        1205,
+        517
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_005.1",
+      "designator": "VIA_005",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        1130,
+        519
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_006.1",
+      "designator": "VIA_006",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        1206,
+        539
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_007.1",
+      "designator": "VIA_007",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        411,
+        560
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_008.1",
+      "designator": "VIA_008",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        573,
+        560
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_009.1",
+      "designator": "VIA_009",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        1242,
+        588
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_010.1",
+      "designator": "VIA_010",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        671,
+        898
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_011.1",
+      "designator": "VIA_011",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        792,
+        899
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_012.1",
+      "designator": "VIA_012",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        803,
+        899
+      ],
+      "confi": 0.75
+    },
+    {
+      "pin_id": "VIA_013.1",
+      "designator": "VIA_013",
+      "pin_num": "1",
+      "side": "through",
+      "xy": [
+        670,
+        926
+      ],
+      "confi": 0.75
+    }
+  ],
+  "nets": [
+    {
+      "net_name": "NET_001",
+      "pins": [
+        "VIA_001.1",
+        "VIA_002.1",
+        "VIA_003.1",
+        "VIA_004.1",
+        "VIA_005.1",
+        "VIA_006.1",
+        "VIA_007.1",
+        "VIA_008.1",
+        "VIA_009.1",
+        "VIA_010.1",
+        "VIA_011.1",
+        "VIA_012.1",
+        "VIA_013.1",
+        "X_AUTO_1.1",
+        "X_AUTO_1.2",
+        "X_AUTO_2.1",
+        "X_AUTO_2.2",
+        "X_AUTO_3.1",
+        "X_AUTO_3.2"
+      ],
+      "confi": 0.65,
+      "flags": [
+        "MULTI_COPPER_BRIDGE"
+      ]
+    }
+  ]
+}
