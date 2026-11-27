@@ -4,7 +4,7 @@ import numpy as np
 from typing import List
 from .schema import PinNode, NetEntry
 
-def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinNode], snap_radius : int = 10, ray_reach : int = 16) -> List[NetEntry]:
+def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinNode], snap_radius : int = 16, ray_reach : int = 24) -> List[NetEntry]:
     G = nx.Graph()
     _, top_labels = cv2.connectedComponents(top_mask)
     _, btm_labels = cv2.connectedComponents(btm_mask)
@@ -19,19 +19,17 @@ def build_netlist(top_mask : np.ndarray, btm_mask : np.ndarray, pins : List[PinN
             lbl = find_copper_label(btm_labels, x, y, snap_radius, ray_reach)
             if lbl > 0:
                 G.add_edge(p.pin_id, f"BOTTOM_COPPER_{lbl}")
-    
-        nets : List[NetEntry] = []
-        idx = 1
-        for comp in nx.connected_components(G):
-            pin_nodes = sorted([n for n in comp if not n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))])
-            if len(pin_nodes) < 2:
-                continue
-            pin_confidences = [G.nodes[n]["meta"].confi for n in pin_nodes]
-            confi = round(sum(pin_confidences) / len(pin_confidences), 4)
-            flags : List[str] = []
-            nets.append(NetEntry(net_name = f"NET_{idx:03d}", pins = pin_nodes, confi = confi, flags = flags))
-            idx += 1
-
+    nets : List[NetEntry] = []
+    idx = 1
+    for comp in nx.connected_components(G):
+        pin_nodes = sorted([n for n in comp if not n.startswith(("TOP_COPPER_", "BOTTOM_COPPER_"))])
+        if len(pin_nodes) < 2:
+            continue
+        pin_confidences = [G.nodes[n]["meta"].confi for n in pin_nodes]
+        confi = round(sum(pin_confidences) / len(pin_confidences), 4)
+        flags : List[str] = []
+        nets.append(NetEntry(net_name = f"NET_{idx:03d}", pins = pin_nodes, confi = confi, flags = flags))
+        idx += 1
     return nets
 
 def sample_region(label_map : np.ndarray, x : int, y : int, r : int) -> int:
