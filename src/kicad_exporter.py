@@ -73,4 +73,6 @@ def build_lib_symbol(comp : ComponentItem, pin_count : int) -> List[str]:
     ])
     return lines
 
-def build_symbol_instance
+def build_symbol_instance(comp : ComponentItem, cx : float, cy : float, pin_count : int) -> List[str]:
+    symbol_name = comp.symbol or "Device:R"
+    
