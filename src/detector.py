@@ -206,7 +206,7 @@ class PCBDetector:
         components : List[ComponentItem] = []
         pins : List[PinNode] = []
         u_d : Set[str] = set()
-        auto_idx = Dict[str, int] = {}
+        auto_idx : Dict[str, int] = {}
         for side_name, cls_name, bbox in raw_detections:
             src_img = top_img if side_name == "top" else btm_img
             ocr_txt = self.run_ocr_crops(src_img, [bbox])[0]
@@ -215,14 +215,14 @@ class PCBDetector:
                 prefix = {"resistor" : "R", "capacitor" : "C", "ic" : "U", "diode" : "D", "inductor" : "L", "transistor" : "Q", "connector" : "J"}.get(ptype, "X")
                 auto_idx[prefix] = auto_idx.get(prefix, 0) + 1
                 des = f"{prefix}{auto_idx[prefix]}"
-            while des in u_d:
-                prefix = re.match(r"[A-Z]+", des)
-                prefix = prefix.group(0) if prefix else "X"
-                auto_idx[prefix] = auto_idx.get(prefix, 0) + 1
-                des = 
             if des in u_d:
-                des = f"{des}_{side_name[0].upper()}{auto_idx}"
-                auto_idx += 1
+                original_des = des
+                suffix = side_name[0].upper()
+                duplicate_idx = 1
+                des = f"{original_des}_{suffix}"
+            while des in u_d:
+                duplicate_idx += 1
+                des = f"{original_des}_{suffix}{duplicate_idx}"
                 review = True
                 notes = f"{notes} | Disambiguated duplicate designator".strip(" |")
             u_d.add(des)
