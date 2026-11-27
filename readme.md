@@ -8,6 +8,8 @@ so basically what it does it 2 image [ top and bottom view of the pcb ] is given
 
 this project is currently use a 2 layered boards, refer sample board for references
 
+Also this project is still under development phase so consider this as 
+
 # How to run this project
 
 Clone the repository:
@@ -59,4 +61,4 @@ python -m src.review_cli --board sample_board --part R1 --approve --reexport
 
 # Ai Disclosure
 
-I used AI alot but not for code generation coz this a very complicated project so technically i cannot build them without using ai { here ai means chatgpt, gemini, claude not ai agent like claude code, codex } so i use ai as learning
+I used AI alot but not for code generation coz this a very complicated project so technically i cannot build them without using ai { here ai means chatgpt, gemini, claude not ai agent like claude code, codex } so i use ai as learning, I mainly used it to understand image processing techniques, explore PCB reverse engineering approaches and solve some errors and issues inside the code.
