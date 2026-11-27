@@ -182,6 +182,7 @@ class PCBDetector:
                 else:
                     frac = (i - half + 0.5) / max(1, n - half)
                     pts.append((x2, int(y1 + frac * (y2 - y1))))
+        pin_
         for label, xy in zip(pin_labels, pts):
             pins.append(PinNode(pin_id = f"{comp.designator}.{label}", designator = comp.designator, pin_num = str(label), side = side, xy = xy, confi = round(comp.confi * 0.85, 4)))
         return pins
